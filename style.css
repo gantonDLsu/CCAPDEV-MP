@@ -78,20 +78,23 @@ header{
     position: absolute;
     left: -1px;
     box-sizing: border-box;
-    border: 1px solid black;
 }
 .content-webdescription #socialmedia{
+    position: relative;
     min-width: 100%;
     max-height: 100%;
     opacity: 0.8;
-    z-index: 1;
 }
-.content-webdescription img{
+.content-webdescription #webdesc{
     position: absolute;
-    top: 1000px;
-    height: 50px;
-    z-index: 2;
+    top: 200px;
+    left: 50px;
+    overflow: hidden;
 }
+.content-webdescription #webdesc img{
+    height: 150px;
+}
+
 
 
 
