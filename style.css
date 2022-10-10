@@ -27,6 +27,7 @@ header{
     text-decoration: none;
 }
 .content-section1{
+    position: relative;
     border: 1px solid black;
     box-sizing: border-box;
     height: 700px;
@@ -94,7 +95,130 @@ header{
 .content-webdescription #webdesc img{
     height: 150px;
 }
-
-
-
-
+.signup-content{
+    position: relative;
+    border: 1px solid black;
+    box-sizing: border-box;
+    width: 1920px;
+    height: 1420px;
+}
+.signup-content #ellipse1{
+    position: absolute;
+    width: 541px;
+    height: 526px;
+    left: -241px;
+    top: -215px;
+    border-radius: 50%;
+    border: 64px solid #8ECAE6;
+}
+.signup-content #ellipse2{
+    position: absolute;
+    width: 541px;
+    height: 523px;
+    left: 1340px;
+    top: 791px;
+    border-radius: 50%;
+    border: 64px solid #8ECAE6;
+}
+.signup-content #ellipse3{
+    position: absolute;
+    width: 478px;
+    height: 466px;
+    left: 143px;
+    top: 851px;
+    border-radius: 50%;
+    background: #D9D9D9;
+}
+.signup-box{
+    position: relative;
+    width: 1320px;
+    height: 1024px;
+    left: 300px;
+    top: 198px;
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    box-shadow: 0px 2px 10px black;
+}
+.signup-title{
+    position: absolute;
+    background: #023047;
+    width: 648px;
+    height: 540px;
+}
+.signup-title span{
+    vertical-align: middle;
+    position: absolute;
+    width: fit-content;
+    line-height: 82px;
+    left: 82px;
+    top: 31px;
+    font-weight: 400;
+    font-size: 19px;
+    letter-spacing: 0.33em;
+    color: #FFFFFF;
+}
+.signup-title h1{
+    margin: 0px;
+    position: absolute;
+    width: fit-content;
+    height: 275px;
+    left: 84px;
+    top: 122px;
+    font-weight: bolder;
+    font-size: 71px;
+    line-height: 93px;
+    color: #8ECAE6;
+}
+.picture{
+    position: absolute;
+    width: 648px;
+    height: 484px;
+    top: 540px;
+    background-color: #8ECAE6;
+    display: flex;
+    align-items: center;
+}
+.picture img{
+    width: 619px;
+    height: 413px;
+}
+.signup-form{
+    position: absolute;
+    width: 672px;
+    height: 1024px;
+    left: 648px;
+    background: #FFFFFF;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+}
+.signup-form h1{
+    position: absolute;
+    top: 128px;
+    width: 100%;
+    height: fit-content;
+    font-weight: 400;
+    font-size: 50px;
+    line-height: 93px;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 50px;
+    line-height: 93px;
+    text-align: center;
+    color: #023047;
+    margin: 0px;
+}
+.signup-form p{
+    position: absolute;
+    top: 177px;
+    width: 100%;
+    height: fit-content;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 93px;
+    text-align: center;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #8ECAE6;
+}
