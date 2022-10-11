@@ -164,7 +164,7 @@
     height: 275px;
     left: 84px;
     top: 122px;
-    font-weight: bolder;
+    font-weight: bold;
     font-size: 71px;
     line-height: 93px;
     color: #8ECAE6;
@@ -190,6 +190,8 @@
     background: #FFFFFF;
     font-family: 'Inter', sans-serif;
     font-style: normal;
+    display: flex;
+    justify-content: center;
 }
 .signup-form h1{
     position: absolute;
@@ -221,6 +223,49 @@
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: #8ECAE6;
+}
+.signup-fields{
+    position: absolute;
+    top: 303px;
+    width: 485px;
+    height: fit-content;
+}
+.signup-fields label{
+    padding-left: 30px;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 30px;
+    text-align: center;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #023047;
+}
+.signup-fields input[type=text]{
+    width: 373px;
+    height: 33px;
+    align-items: center;
+    padding: 10px 56px;
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-size: 27px;
+    background: rgba(196, 196, 196, 0.18);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 1px 1px 2px rgba(0, 0, 0, 0.25);
+    border-radius: 39px;
+    margin-bottom: 30px;
+}
+.signup-fields input[type=button]{
+    width: 247px;
+    height: 65px;
+    padding: 13px;
+    gap: 12px;
+    position: absolute;
+    background: #023047;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 50px;
+    margin-left: 25%;
+    font-weight: 700;
+    font-size: 20px;
+    color: #FFFFFF;
 }
 
 .blog-navbar{
