@@ -1,3 +1,4 @@
+/*HOMEPAGE*/
 .header-navbar{
     position: absolute;
     width: 1920px;
@@ -7,7 +8,6 @@
     background-color: #023047;
 
 }
-
 .header-navbar ul{
     list-style-type: none;
     margin: 0;
@@ -95,6 +95,8 @@
 .content-webdescription #webdesc img{
     height: 150px;
 }
+
+/*SIGNUP PAGE*/
 .signup-content{
     position: relative;
     border: 1px solid black;
@@ -268,6 +270,7 @@
     color: #FFFFFF;
 }
 
+/*BLOG PAGE*/
 .blog-navbar{
     position: absolute;
     top: 0;
