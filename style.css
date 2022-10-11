@@ -271,14 +271,13 @@
     position: relative;
     margin-top: 160px;
     border: 1px solid black;
-    height: 1200px;
+    height: 1500px;
 }
 .blog-trending{
     position: absolute;
-    border: 1px solid black;
     margin-top: 50px;
     width: 550px;
-    height: 900px;
+    height: 1300px;
 }
 .blog-trending p{
     font-family: 'Poppins', sans-serif;
@@ -298,8 +297,40 @@
 .trending-box{
     position: absolute;
     top: 280px;
+    left: 10px;
     border: 1px solid black;
     width: 400px;
-    height: 500px;
+    height: 950px;
+    background-color: #F4F4F4; 
+}
+
+#hashtags ul, #users ul{
+    list-style: none;
+}
+#topics{
+    margin-left: 20px;
+}
+#topics li, #hashtags li{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 70px;
+}
+.blog-trending h2{
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 93px;
+    color: #023047;
+}
+#users li{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 93px;
+    color: #867E7E;
 }
 
