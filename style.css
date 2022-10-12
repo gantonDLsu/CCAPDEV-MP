@@ -326,6 +326,7 @@
     margin-top: 50px;
     width: 550px;
     height: 1300px;
+    border: 1px solid black;
 }
 .blog-trending p{
     font-family: 'Poppins', sans-serif;
@@ -346,10 +347,11 @@
     position: absolute;
     top: 280px;
     left: 10px;
-    border: 1px solid black;
     width: 400px;
-    height: 950px;
+    height: 850px;
     background-color: #F4F4F4; 
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 15px;
 }
 
 #hashtags ul, #users ul{
@@ -372,6 +374,13 @@
     font-size: 40px;
     line-height: 93px;
     color: #023047;
+    margin-top: 10px;
+}
+#users{
+    position: absolute;
+    width: 300px;
+    padding: 5px;
+    top: 545px;
 }
 #users li{
     font-family: 'Poppins';
@@ -380,5 +389,36 @@
     font-size: 19px;
     line-height: 93px;
     color: #867E7E;
+}
+.blog-posts{
+    position: absolute;
+    top: 50px;
+    left: 600px;
+    border: 1px solid black;
+    width: 900px;
+    height: 1300px;
+}
+.blog-outerdesign{
+    position: absolute;
+    width: 885px;
+    height: 545px;
+    background: #F4F4F4;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 15px;
+}
+.blog-innerdesign{
+    border: 1px solid black;
+    position: absolute;
+    width: 829px;
+    height: 425px;
+    top: 50px;
+    left: 30px;
+    background: #FFFFFF;
+}
+.usericon{
+
+}
+.username{
+    
 }
 
