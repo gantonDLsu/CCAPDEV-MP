@@ -416,9 +416,66 @@
     background: #FFFFFF;
 }
 .usericon{
-
+    position: absolute;
+    left: 30px;
+    top: 20px;
+   
 }
+
 .username{
-    
+    position: absolute;
+    width: 300px;
+    height: 100px;
+    left: 100px;
+    top: 10px;
 }
-
+.username #profile{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 25px;
+    line-height: 38px;
+    color: #023047;
+    margin-top: 10px;
+}
+.username #user{
+    position: absolute;
+    font-family: 'Poppins';
+    top: 40px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 19px;
+    letter-spacing: 0.33em;
+    color: #867E7E;
+    
+    margin-top: 5px;
+}
+.blog-innerdesign textarea{
+    margin-top: 100px;
+    margin-left: 70px;
+    resize: none;
+}
+::placeholder{
+    color: black;
+    font-size: 20px
+}
+.button-post{
+    position: absolute;
+    width: 166px;
+    height: 44px;
+    left: 690px;
+    top: 490px;
+    background: #023047;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 50px;
+}
+.button-post span{
+    color: white;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 30px;
+    margin-top: 7px;
+    margin-left: 60px;
+}
