@@ -324,7 +324,7 @@
 .blog-trending{
     position: absolute;
     margin-top: 50px;
-    width: 550px;
+    width: 450px;
     height: 1300px;
     border: 1px solid black;
 }
@@ -393,7 +393,7 @@
 .blog-posts{
     position: absolute;
     top: 50px;
-    left: 600px;
+    left: 500px;
     border: 1px solid black;
     width: 900px;
     height: 1300px;
@@ -419,7 +419,6 @@
     position: absolute;
     left: 30px;
     top: 20px;
-   
 }
 
 .username{
@@ -596,4 +595,21 @@
     letter-spacing: 0.1em;
     color: #000000;
     margin-left: 20px;
+}
+.blog-highlights{
+    position: absolute;
+    border: 1px solid black;
+    width: 424px;
+    height: 1300px;
+    top: 0px;
+    left: 950px;
+}
+.highlight-box{
+    position: absolute;
+    width: 371px;
+    height: 1117px;
+    left: 10px;
+    background: #F4F4F4;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 15px;
 }
