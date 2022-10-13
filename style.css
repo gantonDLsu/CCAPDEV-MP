@@ -326,7 +326,6 @@
     margin-top: 50px;
     width: 450px;
     height: 1300px;
-    border: 1px solid black;
 }
 .blog-trending p{
     font-family: 'Poppins', sans-serif;
@@ -394,7 +393,6 @@
     position: absolute;
     top: 50px;
     left: 500px;
-    border: 1px solid black;
     width: 900px;
     height: 1300px;
 }
@@ -506,7 +504,6 @@
     top: 580px;
     width: 900px;
     height: 700px;
-    border: 1px solid black;
 }
 .entry1 {
     position: absolute;
@@ -598,7 +595,6 @@
 }
 .blog-highlights{
     position: absolute;
-    border: 1px solid black;
     width: 424px;
     height: 1300px;
     top: 0px;
@@ -613,3 +609,76 @@
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 15px;
 }
+.highlight-box #title{
+    position: absolute;
+    width: 563px;
+    height: 233px;
+    left: 90px;
+    top: 10px;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;    
+    line-height: 93px;
+    color: #023047;
+}
+.highlight-box hr{
+    margin-top: 770px;
+}
+.highlight-sports{
+    position: absolute;
+    top: 120px;
+    left: 22px;
+}
+.highlight-sports span{ 
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 19px;
+    letter-spacing: 0.33em;
+    color: #867E7E;
+    margin-left: 100px;
+}
+.highlight-games{
+    position: absolute;
+    width: 350px;
+    height: 350px;
+    top: 400px;
+    left: 22px;
+}
+.highlight-games img[src="images/valo1.png"]{
+    position: absolute;
+    left: 5px;
+    z-index: 2;
+}
+.highlight-games img[src="images/valo2.png"]{
+    position: absolute;
+    top: 110px;
+    left: 20px;
+    z-index: 1;
+}
+.highlight-games span{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 19px;
+    letter-spacing: 0.33em;
+    color: #867E7E;
+    margin-left: 100px;
+    margin-top: 300px;
+}
+.highlight-news{
+    position: absolute;
+    left: 20px;
+    top: 800px;
+}
+.highlight-news span{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    margin-bottom: 10px;
+    font-size: 40px;
+    color: #023047;
+    margin-left: 110px;
+}
+
