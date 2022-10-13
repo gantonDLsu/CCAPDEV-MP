@@ -104,32 +104,10 @@
     width: 1920px;
     height: 1420px;
 }
-.signup-content #ellipse1{
+.signup-background img{
     position: absolute;
-    width: 541px;
-    height: 526px;
-    left: -241px;
-    top: -215px;
-    border-radius: 50%;
-    border: 64px solid #8ECAE6;
-}
-.signup-content #ellipse2{
-    position: absolute;
-    width: 541px;
-    height: 523px;
-    left: 1340px;
-    top: 791px;
-    border-radius: 50%;
-    border: 64px solid #8ECAE6;
-}
-.signup-content #ellipse3{
-    position: absolute;
-    width: 478px;
-    height: 466px;
-    left: 143px;
-    top: 851px;
-    border-radius: 50%;
-    background: #D9D9D9;
+    width: 1920px;
+    height: 1420px;
 }
 .signup-box{
     position: relative;
@@ -242,7 +220,7 @@
     text-transform: uppercase;
     color: #023047;
 }
-.signup-fields input[type=text]{
+.signup-fields input[type=text], .signup-fields input[type=password]{
     width: 373px;
     height: 33px;
     align-items: center;
