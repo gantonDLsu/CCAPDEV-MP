@@ -250,6 +250,26 @@
 .signup-fields input[type=button]:hover{
     background: #8ECAE6;
 }
+.signup-alternative{
+    position: absolute;
+    height: 82px;
+    top: 933px;
+    display: flex;
+    align-items: center;
+}
+.signup-alternative span{
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 93px;
+    text-align: center;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #8ECAE6;
+}
+.signup-alternative img{
+    width: 50px;
+    height: 50px;
+}
 
 /*BLOG PAGE*/
 .blog-navbar{
