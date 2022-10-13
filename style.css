@@ -247,6 +247,9 @@
     font-size: 20px;
     color: #FFFFFF;
 }
+.signup-fields input[type=button]:hover{
+    background: #8ECAE6;
+}
 
 /*BLOG PAGE*/
 .blog-navbar{
