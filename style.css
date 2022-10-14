@@ -690,6 +690,9 @@ video{
     height: 150px;
     object-fit: cover;
 }
+.blog-navbar img:hover{
+    cursor: pointer;
+}
 .blog-navbar span{
     margin-left: 50px;
     margin-top: 60px;
@@ -986,7 +989,17 @@ video{
     top: 400px;
     background: #FFFFFF;
 }
-.entry-reply1 p, .entry-reply2 p{
+.entry-reply1 #replyuser1{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 20px;
+    color: #023047;
+    margin-top: 10px;
+    margin-left: 20px;
+}
+.entry-reply1 #reply1, .entry-reply2 p{
     font-family: 'Poppins';
     font-style: normal;
     font-weight: 400;
