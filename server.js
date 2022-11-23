@@ -31,6 +31,10 @@ app.use(express.static(intialPath));
 let fullname;
 let username;
 
+app.get("/", function (req, res){
+    res.render("homepage");
+});
+
 app.get("/enteract.html", function (req, res){
     res.render("index");
 });
