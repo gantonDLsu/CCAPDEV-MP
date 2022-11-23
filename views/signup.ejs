@@ -1,0 +1,53 @@
+<!-- SIGN UP PAGE -->
+
+<!DOCTYPE html>
+<%- include('header'); -%>
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&family=Poppins&display=swap" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+    <link rel="stylesheet" href="style.css">
+    <title>Sign Up Page</title>
+</head>
+<body>
+    <div class="signup-content">
+        <!--Background-->
+        <div class="signup-background">
+            <img src="images/ellipses.png">
+        </div>
+        <!--Content-->
+        <div class="signup-box">
+            <div class="signup-title">
+                <span onclick='location.href="enteract.html"' title="Back to Home">ENTER-ACT</span>
+                <h1>Micro<br>Blogging<br>made easy.</h1>
+            </div>
+            <div class="picture">
+                <img src="images/image 12.png">
+            </div>
+            <div class="signup-form">
+                <h1>Welcome to Enter-Act!</h1>
+                <p>Register your account</p>
+                <div class="signup-fields">
+                    <form action="signup.html" method="post">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name"><br>
+                        <label for="email">Email Address:</label>
+                        <input type="text" id="email" name="email"><br>
+                        <label for="username">Username:</label>
+                        <input type="text" id="username" name="username"><br>
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" name="password"><br>
+                        <input type="button" value="Sign Up!" onclick='location.href="blogpage.html"'>
+                    </form>
+                </div>
+                <div class="signup-alternative">
+                    <span>Sign In With:</span>
+                    <img src="images/facebook_icon.png" title="Facebook">
+                    <img src="images/google_icon.png" title="Google">
+                    <img src="images/twitter_icon.png" title="Twitter">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
