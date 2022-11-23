@@ -4,18 +4,25 @@ const bodyParser = require('body-parser');
 const mysql = require('mysql');
 const { render } = require('ejs');
  
-/*
-const db = mysql.createConnection({
-    connection: {
-        host: 'localhost',
-        user: 'root',
-        password: 'test',
-        database: 'enteract',
-    }
-})
-*/
 
 const app = express();
+
+const db = mysql.createConnection({
+    host     : 'localhost',
+    user     : 'root',
+    password : 'password123', //CHANGE ACCORDING TO YOUR WORKBENCH PASSWORD
+    database : 'enteract', // input database name
+  });
+  
+  db.connect(function(err) {
+    if (err) {
+      console.error('error connecting: ' + err.stack);
+      return;
+    }
+    else
+      console.log('connected as id' + db.threadId);
+  });
+  
 
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended:true}));
@@ -33,6 +40,9 @@ app.get("/", function (req, res){
     res.render("index");
 });
 
+app.get("/enteract.ejs", function (req, res){
+    res.render("index");
+});
 app.get("/signup.ejs", function (req, res){
     res.render("signup");
 });
