@@ -17,8 +17,6 @@ const db = mysql.createConnection({
 
 const app = express();
 
-
-
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static("public"));
@@ -31,14 +29,18 @@ app.use(express.static(intialPath));
 let fullname;
 let username;
 
-app.get("/enteract.html", function (req, res){
+app.get("/", function (req, res){
+    res.render("homepage");
+});
+
+app.get("/enteract.ejs", function (req, res){
     res.render("index");
 });
-app.get("/signup.html", function (req, res){
+app.get("/signup.ejs", function (req, res){
     res.render("signup");
 });
 
-app.post("/signup.html", function (req, res){
+app.post("/signup.ejs", function (req, res){
     let data = {
         name: req.body.name, 
         email: req.body.email, 
@@ -48,13 +50,13 @@ app.post("/signup.html", function (req, res){
     fullname = data.name;
     username = data.user;
     res.render("blogpage", { Name: data.name, userName: data.user});
-    res.redirect("/blogpage.html");
+    res.redirect("/blogpage.ejs");
 });
 
-app.get("/aboutus.html", function (req, res){
+app.get("/aboutus.ejs", function (req, res){
     res.render("aboutus");
 });
-app.get("/blogpage.html", function (req, res){
+app.get("/blogpage.ejs", function (req, res){
     res.render("blogpage", { Name: fullname, userName: username});
 });
 
