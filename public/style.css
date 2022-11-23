@@ -600,6 +600,11 @@ video{
     text-transform: uppercase;
     color: #8ECAE6;
 }
+.signup-form #login-link{
+    top: 800px;
+    cursor: pointer;
+    text-decoration-line: underline;
+}
 .signup-fields{
     position: absolute;
     top: 303px;
