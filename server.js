@@ -72,10 +72,7 @@ app.get("/login.ejs", function (req, res){
 });
 
 app.post("/loginuser", function (req, res) {
-    const username = req.body.username;
-    const password = req.body.password;
-
-    let sql = "SELECT username, password FROM users WHERE username='"+username+"' AND password='"+password+"'";
+    let sql = "SELECT username, password FROM users WHERE username='"+req.body.username+"' AND password='"+req.body.password+"'";
     let query = db.query(sql, (err, result) => {
         if (err) throw err;
 
