@@ -60,6 +60,10 @@ app.post("/signup.ejs", function (req, res){
     res.redirect("/blogpage.ejs");
 });
 
+app.get("/login.ejs", function (req, res){
+    res.render("login");
+});
+
 app.get("/aboutus.ejs", function (req, res){
     res.render("aboutus");
 });
