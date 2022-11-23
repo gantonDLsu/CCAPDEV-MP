@@ -634,7 +634,7 @@ video{
     border-radius: 39px;
     margin-bottom: 30px;
 }
-.signup-fields input[type=button]{
+.signup-fields input[type=submit]{
     width: 247px;
     height: 65px;
     padding: 13px;
