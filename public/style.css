@@ -648,7 +648,7 @@ video{
     font-size: 20px;
     color: #FFFFFF;
 }
-.signup-fields input[type=button]:hover{
+.signup-fields input[type=submit]:hover{
     background: #8ECAE6;
     cursor: pointer;
 }
@@ -859,15 +859,18 @@ video{
     margin-top: 5px;
 }
 .blog-innerdesign textarea{
+    width: 694.4px;
+    height: 298.667px;
     margin-top: 100px;
     margin-left: 70px;
     resize: none;
+    font-size: 20px;
 }
 ::placeholder{
     color: black;
     font-size: 20px
 }
-.button-post{
+.blog-outerdesign input[value="Post"]{
     position: absolute;
     width: 166px;
     height: 44px;
@@ -876,32 +879,33 @@ video{
     background: #023047;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 50px;
-}
-.button-post span{
     color: white;
     font-family: 'Poppins';
     font-style: normal;
     font-weight: 700;
     font-size: 20px;
     line-height: 30px;
-    margin-top: 7px;
-    margin-left: 60px;
 }
-.button-cancel{
+.blog-outerdesign input[value="Post"]:hover{
+    background: #8ECAE6;
+    cursor: pointer;
+}
+.blog-outerdesign input[value="CANCEL"]{
     position: absolute;
     width: 166px;
     height: 44px;
-    left: 590px;
-    top: 505px;
-    
-}
-.button-cancel span, .button-draft span{
-    font-family: 'Poppins';
-    font-style: normal;
+    left: 540px;
+    top: 490px;
     font-weight: 400;
     font-size: 12px;
     letter-spacing: 0.33em;
     color: #867E7E;
+    background-color: transparent;
+    border-color: transparent;
+}
+.blog-outerdesign input[value="CANCEL"]:hover{
+    text-decoration: underline;
+    cursor: pointer;
 }
 .button-draft{
     position: absolute;
