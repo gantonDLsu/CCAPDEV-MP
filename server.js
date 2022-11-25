@@ -95,16 +95,12 @@ app.get("/blogpage.ejs", function (req, res){
     res.render("blogpage", { Name: fullname, userName: username});
 });
 
-app.get("/posting", function (req, res){
-    res.render("blogpage", {namePost: fullname_arr, userPost: username_arr, textPost: post_arr});
-});
 app.post("/posting", function (req, res){
     fullname_arr.push(fullname);
     username_arr.push(username);
     post = req.body.blog-post;
     post_arr.push(post);
     res.render("blogpage", {namePost: fullname_arr, userPost: username_arr, textPost: post_arr});
-    res.redirect("/posting");
 });
 
 app.listen(3000, () => console.log('listening on port 3000!')); 
