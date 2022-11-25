@@ -99,7 +99,7 @@ app.get("/aboutus.ejs", function (req, res){
     res.render("aboutus");
 });
 
-app.post("/adduser", function (req, res){
+app.post("/posting", function (req, res){
     const today = new Date();
     let data = {
         user: userid,
