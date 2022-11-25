@@ -99,7 +99,7 @@ app.get("/aboutus.ejs", function (req, res){
     res.render("aboutus");
 });
 
-app.post("/addpost", function (req, res){
+app.post("/adduser", function (req, res){
     const today = new Date();
     let data = {
         user: userid,
@@ -115,12 +115,12 @@ app.post("/addpost", function (req, res){
 });
 
 
-app.post("/posting", function (req, res){
-    fullname_arr.push(fullname);
-    username_arr.push(username);
-    post = req.body.blog-post;
-    post_arr.push(post);
-    res.render("blogpage", {namePost: fullname_arr, userPost: username_arr, textPost: post_arr});
-});
+// app.post("/posting", function (req, res){
+//     fullname_arr.push(fullname);
+//     username_arr.push(username);
+//     post = req.body.blog-post;
+//     post_arr.push(post);
+//     res.render("blogpage", {namePost: fullname_arr, userPost: username_arr, textPost: post_arr});
+// });
 
 app.listen(3000, () => console.log('listening on port 3000!')); 
