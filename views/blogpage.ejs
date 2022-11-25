@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&family=Poppins&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&family=Poppins&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
+
 <body>
     <!--Navbar-->
-   <header class="blog-navbar">
+    <header class="blog-navbar">
         <img src="images/logo2.png" alt="Enter-Act Logo" onclick='location.href="enteract.ejs"'>
         <span>Enter Act</span>
         <nav>
@@ -20,9 +23,9 @@
             </ul>
         </nav>
         <div id="post">Post a Blog</div>
-   </header> 
-   <!--Contents of the Blog-->
-   <div class="blog-content">
+    </header>
+    <!--Contents of the Blog-->
+    <div class="blog-content">
         <div class="blog-trending">
             <p>What's Trending:</p>
             <img src="images/Vector1.png" alt="">
@@ -57,14 +60,21 @@
             </div>
         </div>
         <!--Blog Posting interface-->
+<<<<<<< HEAD
         <form action= actionCheck (act);  method="post">
             <div class="blog-posts">
                 <div class="blog-outerdesign">
+=======
+        <div class="blog-posts">
+            <div class="blog-outerdesign">
+                <form action="/addpost" method="post">
+>>>>>>> 20a900de27c040a9782f5cf8b0e8fe9a943431c2
                     <div class="blog-innerdesign">
                         <div class="usericon">
                             <img src="images/usericon.png" alt="User Icon">
                         </div>
                         <div class="username">
+<<<<<<< HEAD
                             <p id="profile"><%=Name %></p>
                             <p id="user"><%=userName %></p>
                         </div>
@@ -86,6 +96,22 @@
                     <button class="button-draft">SAVE TO DRAFT</button>
                 </div>
             </form>
+=======
+                            <p id="profile">
+                                <%=Name %>
+                            </p>
+                            <p id="user">
+                                <%=userName %>
+                            </p>
+                        </div>
+                        <textarea name="message" id="blog-post" placeholder="Write a post..."></textarea>
+                    </div>
+                    <!--Buttons in Posting-->
+                    <input type="submit" value="Post">
+                    <input type="submit" value="CANCEL">
+                </form>
+            </div>
+>>>>>>> 20a900de27c040a9782f5cf8b0e8fe9a943431c2
             <!--Blog Entries-->
             <div class="blog-entries">
                 <%for(let i=0; i<textPost.length; i++){ %>
@@ -118,9 +144,9 @@
                         <span>#SPORTS</span>
                     </div>
                     <div class="highlight-games">
-                       <img src="images/valo1.png" alt="Valorant Image">
-                       <img src="images/valo2.png" alt="Valorant Image">
-                       <span>#GAMES</span>
+                        <img src="images/valo1.png" alt="Valorant Image">
+                        <img src="images/valo2.png" alt="Valorant Image">
+                        <span>#GAMES</span>
                     </div>
                     <hr>
                     <div class="highlight-news">
@@ -130,8 +156,13 @@
                 </div>
             </div>
         </div>
+<<<<<<< HEAD
    </div>
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
    <script src="buttonfunction.js"></script>
+=======
+    </div>
+>>>>>>> 20a900de27c040a9782f5cf8b0e8fe9a943431c2
 </body>
+
 </html>

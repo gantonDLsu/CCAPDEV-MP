@@ -33,12 +33,17 @@ let intialPath = path.join(__dirname, "public");
 app.use(bodyParser.json());
 app.use(express.static(intialPath));
 
-let fullname;
+let name;
 let username;
+<<<<<<< HEAD
 let post;
 let fullname_arr = [];
 let username_arr = [];
 let post_arr = [];
+=======
+let userid;
+
+>>>>>>> 20a900de27c040a9782f5cf8b0e8fe9a943431c2
 app.get("/", function (req, res){
     res.render("index");
 });
@@ -60,13 +65,15 @@ app.post("/adduser", function (req, res){
 
     let sql = "INSERT INTO users SET ?";
     let query = db.query(sql, data, (err, results) => {
-        try { if (err) throw err; }
+        try {
+            if (err) throw err;
+        }
         catch (err) {
             console.log(err);
             res.render("signup", {errorMessage: err});
             return;
         };
-        res.redirect("/blogpage.ejs");
+        res.render("login", {errorMessage: "You must login first after signing in."});
     });
 });
 
@@ -75,7 +82,7 @@ app.get("/login.ejs", function (req, res){
 });
 
 app.post("/loginuser", function (req, res) {
-    let sql = "SELECT username, password FROM users WHERE username='"+req.body.username+"' AND password='"+req.body.password+"'";
+    let sql = "SELECT * FROM users WHERE username='"+req.body.username+"' AND password='"+req.body.password+"'";
     let query = db.query(sql, (err, result) => {
         if (err) throw err;
 
@@ -83,7 +90,10 @@ app.post("/loginuser", function (req, res) {
             res.render("login", {errorMessage: "User not found"});
         }
         else {
-            res.redirect("/blogpage.ejs");
+            name = result[0].name;
+            username = result[0].username;
+            userid = result[0].userid;
+            res.render("blogpage", {Name : name, userName : username});
         }
     });
 });
@@ -91,10 +101,23 @@ app.post("/loginuser", function (req, res) {
 app.get("/aboutus.ejs", function (req, res){
     res.render("aboutus");
 });
-app.get("/blogpage.ejs", function (req, res){
-    res.render("blogpage", { Name: fullname, userName: username});
+
+app.post("/addpost", function (req, res){
+    const today = new Date();
+    let data = {
+        user: userid,
+        message: req.body.message,
+        datetime: today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()+' '+today.getHours()+':'+today.getMinutes()+':'+today.getSeconds(),
+        likes: 0
+    };
+    let sql = "INSERT INTO posts SET ?";
+    let query = db.query(sql, data, (err, results) => {
+        if (err) throw err;
+        res.render("blogpage", {Name: name, userName: username});
+    });
 });
 
+<<<<<<< HEAD
 
 app.post("/posting", function (req, res){
     fullname_arr.push(fullname);
@@ -106,3 +129,6 @@ app.post("/posting", function (req, res){
 });
 
 app.listen(3000, () => console.log('listening on port 3000!')); 
+=======
+app.listen(3000, () => console.log('listening on port 3000!'));
+>>>>>>> 20a900de27c040a9782f5cf8b0e8fe9a943431c2
