@@ -88,16 +88,17 @@
             </form>
             <!--Blog Entries-->
             <div class="blog-entries">
+                <%for(let i = 0; i < textPost.length; i++){ %>
                 <div class="entry1">
                     <div class="entry-post">
                         <div class="usericon2">
                             <img src="images/usericon.png" alt="User Icon">
                         </div>
                         <div class="username2">
-                            <p id="profile2">Clark Davis</p>
-                            <p id="user2">@ClarkDavis</p>
+                            <p id="profile2"><%=namePost[i] %></p>
+                            <p id="user2"><%=userPost[i] %></p>
                         </div>
-                        <p class="post1">I can't believe @TenZOfficial is staying with Sentinels</p>
+                        <p class="post1"><%=textPost[i] %></p>
                     </div>
                     <div class="entry-reply1">
                         <p id="replyuser1">Valofan</p>
@@ -107,6 +108,7 @@
                         <p>replies...</p>
                     </div>
                 </div>
+                <% } %>
             </div>
             <div class="blog-highlights">
                 <div class="highlight-box">
