@@ -884,14 +884,10 @@ video{
     font-style: normal;
     font-weight: 700;
     font-size: 20px;
-<<<<<<< HEAD
 }
 .button-post:hover{
     background: #022c41;
     box-shadow: 5px 5px 5px grey;
-=======
-    line-height: 30px;
->>>>>>> 20a900de27c040a9782f5cf8b0e8fe9a943431c2
 }
 .blog-outerdesign input[value="Post"]:hover{
     background: #8ECAE6;
@@ -901,31 +897,17 @@ video{
     position: absolute;
     width: 166px;
     height: 44px;
-<<<<<<< HEAD
     left: 530px;
     top: 492px;
     font-family: 'Poppins';
     font-style: normal;
-=======
-    left: 540px;
-    top: 490px;
->>>>>>> 20a900de27c040a9782f5cf8b0e8fe9a943431c2
     font-weight: 400;
     font-size: 12px;
     letter-spacing: 0.33em;
     color: #867E7E;
-<<<<<<< HEAD
     padding: 0;
     border: none;
     background: none;
-=======
-    background-color: transparent;
-    border-color: transparent;
-}
-.blog-outerdesign input[value="CANCEL"]:hover{
-    text-decoration: underline;
-    cursor: pointer;
->>>>>>> 20a900de27c040a9782f5cf8b0e8fe9a943431c2
 }
 /* .button-cancel span, .button-draft span{
     font-family: 'Poppins';
