@@ -10,7 +10,7 @@ const app = express();
 const db = mysql.createConnection({
     host     : 'localhost',
     user     : 'root',
-    password : 'Hope2714612!', //CHANGE ACCORDING TO YOUR WORKBENCH PASSWORD
+    password : 'password123', //CHANGE ACCORDING TO YOUR WORKBENCH PASSWORD
     database : 'enteract', // input database name
   });
   
@@ -35,11 +35,9 @@ app.use(express.static(intialPath));
 
 let name;
 let username;
-let post;
-let fullname_arr = [];
-let username_arr = [];
-let post_arr = [];
 let userid;
+let posts;
+let comments = [];
 
 app.get("/", function (req, res){
     res.render("index");
@@ -87,40 +85,54 @@ app.post("/loginuser", function (req, res) {
             res.render("login", {errorMessage: "User not found"});
         }
         else {
-            name = result[0].name;
-            username = result[0].username;
-            userid = result[0].userid;
-            res.render("blogpage", {Name : name, userName : username, textPost: post_arr});
-        }
+            let postquery = db.query("SELECT * FROM posts ORDER BY datetime DESC", (err, postresults) => {
+                name = result[0].name;
+                username = result[0].username;
+                userid = result[0].userid;
+                posts = postresults;
+                let commentquery = db.query("SELECT * FROM usercomments", (err, commentresults) => {
+                    res.render("blogpage", {Name : name, userName : username, posts: postresults, comments: commentresults});
+                });
+            });
+        };
     });
 });
 
 app.get("/aboutus.ejs", function (req, res){
     res.render("aboutus");
 });
-app.
+
 app.post("/posting", function (req, res){
     const today = new Date();
     let data = {
-        user: userid,
+        username: username,
+        name: name,
         message: req.body.message,
         datetime: today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()+' '+today.getHours()+':'+today.getMinutes()+':'+today.getSeconds(),
-        likes: 0
     };
     let sql = "INSERT INTO posts SET ?";
     let query = db.query(sql, data, (err, results) => {
         if (err) throw err;
-        res.render("blogpage", {Name: name, userName: username, textPost: post_arr});
+        let postquery = db.query("SELECT * FROM posts ORDER BY postid DESC", (err, results) => {
+            posts = results;
+            res.render("blogpage", {Name : name, userName : username, posts: posts, comments: comments});
+        });
     });
 });
 
-
-// app.post("/posting", function (req, res){
-//     fullname_arr.push(fullname);
-//     username_arr.push(username);
-//     post = req.body.blog-post;
-//     post_arr.push(post);
-//     res.render("blogpage", {namePost: fullname_arr, userPost: username_arr, textPost: post_arr});
-// });
+app.post("/addcomment:postid", function (req, res){
+    let data = {
+        postid: parseInt(req.params.postid.slice(1)),
+        name: name,
+        comment: req.body.comment
+    };
+    let query = db.query("INSERT INTO usercomments SET ?", data, (err, results) => {
+        if (err) throw err;
+        let commentquery = db.query("SELECT * FROM usercomments", (err, commentresults) => {
+            comments = commentresults;
+            res.render("blogpage", {Name : name, userName : username, posts: posts, comments: comments});
+        });
+    })
+});
 
 app.listen(3000, () => console.log('listening on port 3000!')); 

@@ -729,8 +729,8 @@ video{
 .blog-content{
     position: relative;
     margin-top: 160px;
-    border: 1px solid black;
-    height: 1500px;
+    /* border: 1px solid black; */
+    height: 100%;
 }
 .blog-trending{
     position: absolute;
@@ -865,12 +865,13 @@ video{
     margin-left: 70px;
     resize: none;
     font-size: 20px;
+    font-family: 'Poppins';
 }
 ::placeholder{
     color: black;
     font-size: 20px
 }
-.blog-outerdesign input[value="Post"]{
+.button-post{
     position: absolute;
     width: 166px;
     height: 44px;
@@ -889,12 +890,9 @@ video{
     background: #022c41;
     box-shadow: 5px 5px 5px grey;
     line-height: 30px;
-}
-.blog-outerdesign input[value="Post"]:hover{
-    background: #8ECAE6;
     cursor: pointer;
 }
-.blog-outerdesign input[value="CANCEL"]{
+.button-cancel{
     position: absolute;
     width: 166px;
     height: 44px;
@@ -914,18 +912,10 @@ video{
     background-color: transparent;
     border-color: transparent;
 }
-.blog-outerdesign input[value="CANCEL"]:hover{
+.button-cancel:hover{
     text-decoration: underline;
     cursor: pointer;
 }
-/* .button-cancel span, .button-draft span{
-    font-family: 'Poppins';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 12px;
-    letter-spacing: 0.33em;
-    color: #867E7E;
-} */
 .button-draft{
     position: absolute;
     width: 166px;
@@ -946,51 +936,54 @@ video{
     position: relative;
     top: 580px;
     width: 900px;
-    height: 700px;
+    height: fit-content;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
 }
-.entry1 {
-    position: absolute;
+.entry {
     background: #F4F4F4;
     width: 885px;
-    height: 667px;
+    /* height: 667px; */
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 15px;
     box-sizing: border-box;
+    margin-bottom: 5px;
 }
-.entry1 .entry-post{
-    position: absolute;
+.entry-post{
     width: 806px;
-    height: 200px;
-    left: 40px;
-    top: 42px;
+    height: fit-content;
+    margin-left: 40px;
+    margin-top: 42px;
     background: #FFFFFF;
     box-sizing: border-box;
 }
-.usericon2{
+.postusericon{
     position: absolute;
-    left: 20px;
-    top: 20px; 
+    width: 54px;
+    height: 54px;
+    padding-left: 20px;
+    padding-top: 20px;
 }
 
-.username2{
-    position: absolute;
+.postusername{
     width: 300px;
     height: 100px;
-    left: 100px;
-    top: 10px;
+    margin-left: 100px;
+    margin-top: 10px;
+    margin-bottom: 0px;
 }
-.username2 #profile2{
+.postusername #profile{
     font-family: 'Poppins';
     font-style: normal;
     font-weight: 700;
     font-size: 25px;
     line-height: 38px;
     color: #023047;
-    margin-top: 10px;
+    padding-top: 20px;
+    margin-block-end: 0px;
 }
-.username2 #user2{
-    position: absolute;
+.postusername #user{
     font-family: 'Poppins';
     top: 40px;
     font-style: normal;
@@ -998,10 +991,9 @@ video{
     font-size: 19px;
     letter-spacing: 0.33em;
     color: #867E7E;
-    margin-top: 5px;
+    margin-block-start: 0px;
 }
-.post1{
-    position: absolute;
+.post{
     width: 739px;
     height: 141px;
     left: 40px;
@@ -1012,34 +1004,38 @@ video{
     font-size: 14px;
     line-height: 30px;
     letter-spacing: 0.1em;
+    margin-left: 30px;
 }
-.entry-reply1{
-    position: absolute;
+#comment{
+    width: 80%;
+    min-height: 30px;
+    height: fit-content;
+    resize: none;
+    font-size: 20px;
+    font-family: 'Poppins';
+    margin-left: 40px;
+}
+.entry-reply{
+    /* position: absolute; */
     width: 806px;
     height: 90px;
     left: 40px;
     top: 300px;
     background: #FFFFFF;
+    margin-left: 40px;
+    margin-bottom: 10px;
 }
-.entry-reply2{
-    position: absolute;
-    width: 806px;
-    height: 90px;
-    left: 40px;
-    top: 400px;
-    background: #FFFFFF;
-}
-.entry-reply1 #replyuser1{
+.entry-reply #replyuser{
     font-family: 'Poppins';
     font-style: normal;
     font-weight: 700;
     font-size: 20px;
     line-height: 20px;
     color: #023047;
-    margin-top: 10px;
+    padding-top: 10px;
     margin-left: 20px;
 }
-.entry-reply1 #reply1, .entry-reply2 p{
+.entry-reply #reply, .entry-reply p{
     font-family: 'Poppins';
     font-style: normal;
     font-weight: 400;
@@ -1048,6 +1044,22 @@ video{
     letter-spacing: 0.1em;
     color: #000000;
     margin-left: 20px;
+}
+.comment-button{
+    width: 90px;
+    height: 30px;
+    background: #023047;
+    border-radius: 50px;
+    color: white;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 200;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+.comment-button:hover{
+    background: #8ECAE6;
+    cursor: pointer;
 }
 .blog-highlights{
     position: absolute;
