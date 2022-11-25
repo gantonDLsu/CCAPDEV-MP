@@ -109,7 +109,7 @@ app.post("/addpost", function (req, res){
     let sql = "INSERT INTO posts SET ?";
     let query = db.query(sql, data, (err, results) => {
         if (err) throw err;
-        res.render("blogpage", {Name: name, userName: username});
+        res.render("blogpage", {Name: name, userName: username, textPost: post_arr});
     });
 });
 
