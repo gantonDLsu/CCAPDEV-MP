@@ -35,15 +35,12 @@ app.use(express.static(intialPath));
 
 let name;
 let username;
-<<<<<<< HEAD
 let post;
 let fullname_arr = [];
 let username_arr = [];
 let post_arr = [];
-=======
 let userid;
 
->>>>>>> 20a900de27c040a9782f5cf8b0e8fe9a943431c2
 app.get("/", function (req, res){
     res.render("index");
 });
@@ -117,7 +114,6 @@ app.post("/addpost", function (req, res){
     });
 });
 
-<<<<<<< HEAD
 
 app.post("/posting", function (req, res){
     fullname_arr.push(fullname);
@@ -129,6 +125,3 @@ app.post("/posting", function (req, res){
 });
 
 app.listen(3000, () => console.log('listening on port 3000!')); 
-=======
-app.listen(3000, () => console.log('listening on port 3000!'));
->>>>>>> 20a900de27c040a9782f5cf8b0e8fe9a943431c2
