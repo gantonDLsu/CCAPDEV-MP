@@ -10,7 +10,7 @@ const app = express();
 const db = mysql.createConnection({
     host     : 'localhost',
     user     : 'root',
-    password : 'Hope2714612!', //CHANGE ACCORDING TO YOUR WORKBENCH PASSWORD
+    password : 'password123', //CHANGE ACCORDING TO YOUR WORKBENCH PASSWORD
     database : 'enteract', // input database name
   });
   
@@ -90,7 +90,7 @@ app.post("/loginuser", function (req, res) {
             name = result[0].name;
             username = result[0].username;
             userid = result[0].userid;
-            res.render("blogpage", {Name : name, userName : username});
+            res.render("blogpage", {Name : name, userName : username, textPost: post_arr});
         }
     });
 });
@@ -110,7 +110,7 @@ app.post("/addpost", function (req, res){
     let sql = "INSERT INTO posts SET ?";
     let query = db.query(sql, data, (err, results) => {
         if (err) throw err;
-        res.render("blogpage", {Name: name, userName: username});
+        res.render("blogpage", {Name: name, userName: username, textPost: post_arr});
     });
 });
 
@@ -120,7 +120,6 @@ app.post("/posting", function (req, res){
     username_arr.push(username);
     post = req.body.blog-post;
     post_arr.push(post);
-    console.log(post_arr);
     res.render("blogpage", {namePost: fullname_arr, userPost: username_arr, textPost: post_arr});
 });
 
