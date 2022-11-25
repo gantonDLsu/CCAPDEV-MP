@@ -1,22 +1,10 @@
-let action;
-
 $(".button-post").on("click", function(){
-    action = "posting";
+    $("#getaction").attr("action", "posting");
 });
 $(".button-cancel").on("click", function(){
-    action = "canceling";
+   $("#getaction").attr("action", "canceling");
 });
 $(".button-draft").on("click", function(){
-    action = "drafting";
+    $("#getaction").attr("action", "drafting");
 });
 
-function actionCheck (act){
-    switch(act){
-        case "posting":
-            return act;
-        case "canceling":
-            return act;
-        default:
-            return act;
-    }  
-}
