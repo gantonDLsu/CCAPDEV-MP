@@ -10,7 +10,7 @@ const app = express();
 const db = mysql.createConnection({
     host     : 'localhost',
     user     : 'root',
-    password : 'password123', //CHANGE ACCORDING TO YOUR WORKBENCH PASSWORD
+    password : 'Hope2714612!', //CHANGE ACCORDING TO YOUR WORKBENCH PASSWORD
     database : 'enteract', // input database name
   });
   
@@ -93,4 +93,4 @@ app.get("/blogpage.ejs", function (req, res){
 });
 
 
-app.listen(3000, () => console.log('listening on port 3000!'));
+app.listen(3000, () => console.log('listening on port 3000!')); 

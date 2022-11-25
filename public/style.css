@@ -876,39 +876,55 @@ video{
     background: #023047;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 50px;
-}
-.button-post span{
     color: white;
     font-family: 'Poppins';
     font-style: normal;
     font-weight: 700;
     font-size: 20px;
-    line-height: 30px;
-    margin-top: 7px;
-    margin-left: 60px;
+}
+.button-post:hover{
+    background: #022c41;
+    box-shadow: 5px 5px 5px grey;
 }
 .button-cancel{
     position: absolute;
     width: 166px;
     height: 44px;
-    left: 590px;
-    top: 505px;
-    
-}
-.button-cancel span, .button-draft span{
+    left: 530px;
+    top: 492px;
     font-family: 'Poppins';
     font-style: normal;
     font-weight: 400;
     font-size: 12px;
     letter-spacing: 0.33em;
     color: #867E7E;
+    padding: 0;
+    border: none;
+    background: none;
 }
+/* .button-cancel span, .button-draft span{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    letter-spacing: 0.33em;
+    color: #867E7E;
+} */
 .button-draft{
     position: absolute;
     width: 166px;
-    height: 44px;
+    height: 19px;
     left: 40px;
     top: 505px;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    letter-spacing: 0.33em;
+    color: #867E7E;
+    padding: 0;
+    border: none;
+    background: none;
 }
 .blog-entries{
     position: relative;
