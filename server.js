@@ -95,11 +95,13 @@ app.get("/blogpage.ejs", function (req, res){
     res.render("blogpage", { Name: fullname, userName: username});
 });
 
+
 app.post("/posting", function (req, res){
     fullname_arr.push(fullname);
     username_arr.push(username);
     post = req.body.blog-post;
     post_arr.push(post);
+    console.log(post_arr);
     res.render("blogpage", {namePost: fullname_arr, userPost: username_arr, textPost: post_arr});
 });
 
