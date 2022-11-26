@@ -83,6 +83,9 @@
             <div class="blog-entries">
                 <% posts.forEach(function(post){ %>
                 <div class="entry">
+                    <form action="/deletepost:<%=post.postid%>" method="post">
+                        <button type="submit" class="delete-button">Delete post</button>
+                    </form>
                     <div class="entry-post">
                         <div class="postusericon">
                             <img src="images/usericon.png" alt="User Icon">
@@ -100,6 +103,9 @@
                     <% comments.forEach(function (comment) { %>
                         <% if (post.postid == comment.postid) { %>
                         <div class="entry-reply">
+                            <form action="/deletecomment:<%=comment.commentid%>" method="post">
+                                <button type="submit" class="delete-comment">Delete</button>
+                            </form>
                             <p id="replyuser"><%= comment.name %></p>
                             <p id="reply"><%= comment.comment %></p>
                         </div>

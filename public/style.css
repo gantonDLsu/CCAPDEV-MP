@@ -900,8 +900,6 @@ video{
     top: 492px;
     font-family: 'Poppins';
     font-style: normal;
-    left: 540px;
-    top: 490px;
     font-weight: 400;
     font-size: 12px;
     letter-spacing: 0.33em;
@@ -965,7 +963,6 @@ video{
     padding-left: 20px;
     padding-top: 20px;
 }
-
 .postusername{
     width: 300px;
     height: 100px;
@@ -993,6 +990,44 @@ video{
     color: #867E7E;
     margin-block-start: 0px;
 }
+.delete-button{
+    position: absolute;
+    width: fit-content;
+    margin-left: 800px;
+    margin-top: 10px;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    color: #867E7E;
+    padding: 0;
+    border: none;
+    background: none;
+    background-color: transparent;
+    border-color: transparent;
+    text-align: right;
+}
+.delete-comment{
+    position: absolute;
+    width: fit-content;
+    margin-left: 750px;
+    margin-top: 10px;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    color: #867E7E;
+    padding: 0;
+    border: none;
+    background: none;
+    background-color: transparent;
+    border-color: transparent;
+    text-align: right;
+}
+.delete-button:hover, .delete-comment:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
 .post{
     width: 739px;
     height: 141px;
@@ -1014,6 +1049,8 @@ video{
     font-size: 20px;
     font-family: 'Poppins';
     margin-left: 40px;
+    padding: 5px;
+    border-radius: 10px;
 }
 .entry-reply{
     /* position: absolute; */
@@ -1046,6 +1083,7 @@ video{
     margin-left: 20px;
 }
 .comment-button{
+    position: absolute;
     width: 90px;
     height: 30px;
     background: #023047;
@@ -1055,7 +1093,8 @@ video{
     font-style: normal;
     font-weight: 200;
     font-size: 12px;
-    margin-bottom: 10px;
+    margin-top: 36px;
+    margin-left: 5px;
 }
 .comment-button:hover{
     background: #8ECAE6;

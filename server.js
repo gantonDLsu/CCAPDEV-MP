@@ -135,4 +135,36 @@ app.post("/addcomment:postid", function (req, res){
     })
 });
 
+app.post("/deletepost:postid", function (req, res){
+    let data = {
+        postid: parseInt(req.params.postid.slice(1))
+    };
+    let deletecomments = db.query("DELETE FROM usercomments WHERE ?", data, (err, result) => {
+        if (err) throw err;
+        let commentquery = db.query("SELECT * FROM usercomments", (err, results) => {
+            comments = results;
+        });
+    });
+    let query = db.query("DELETE FROM posts WHERE ?", data, (err, result) => {
+        if (err) throw err;
+        let postquery = db.query("SELECT * FROM posts ORDER BY postid DESC", (err, results) => {
+            posts = results;
+            res.render("blogpage", {Name : name, userName : username, posts: posts, comments: comments});
+        });
+    });
+});
+
+app.post("/deletecomment:commentid", function (req, res){
+    let data = {
+        commentid: parseInt(req.params.commentid.slice(1))
+    };
+    let deletecomments = db.query("DELETE FROM usercomments WHERE ?", data, (err, result) => {
+        if (err) throw err;
+        let commentquery = db.query("SELECT * FROM usercomments", (err, results) => {
+            comments = results;
+            res.render("blogpage", {Name : name, userName : username, posts: posts, comments: comments});
+        });
+    });
+});
+
 app.listen(3000, () => console.log('listening on port 3000!')); 
