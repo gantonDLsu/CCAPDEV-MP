@@ -91,11 +91,16 @@ app.post("/loginuser", function (req, res) {
                 userid = result[0].userid;
                 posts = postresults;
                 let commentquery = db.query("SELECT * FROM usercomments", (err, commentresults) => {
-                    res.render("blogpage", {Name : name, userName : username, posts: postresults, comments: commentresults});
+                    comments = commentresults;
+                    res.render("blogpage", {Name : name, userName : username, posts: posts, comments: comments});
                 });
             });
         };
     });
+});
+
+app.get("/blogpage.ejs", function (req, res) {
+    res.render("blogpage", {Name : name, userName : username, posts: posts, comments: comments});
 });
 
 app.get("/aboutus.ejs", function (req, res){

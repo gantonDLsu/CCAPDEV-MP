@@ -832,7 +832,7 @@ video{
 
 .username{
     position: absolute;
-    width: 300px;
+    width: fit-content;
     height: 100px;
     left: 100px;
     top: 10px;
