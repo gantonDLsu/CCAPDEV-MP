@@ -24,14 +24,14 @@ DROP TABLE IF EXISTS `posts`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `posts` (
   `postid` int NOT NULL AUTO_INCREMENT,
-  `user` int NOT NULL,
-  `message` varchar(255) COLLATE utf8mb3_bin NOT NULL,
+  `username` varchar(45) NOT NULL,
+  `name` varchar(45) NOT NULL,
+  `message` varchar(255) NOT NULL,
   `datetime` datetime NOT NULL,
-  `likes` int DEFAULT NULL,
   PRIMARY KEY (`postid`),
-  KEY `userid_idx` (`user`),
-  CONSTRAINT `userid` FOREIGN KEY (`user`) REFERENCES `users` (`userid`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
+  KEY `userid_idx` (`username`),
+  CONSTRAINT `poststousersusername` FOREIGN KEY (`username`) REFERENCES `users` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,6 +40,7 @@ CREATE TABLE `posts` (
 
 LOCK TABLES `posts` WRITE;
 /*!40000 ALTER TABLE `posts` DISABLE KEYS */;
+INSERT INTO `posts` VALUES (1,'johndoe','John Doe','Hello world','2022-11-26 08:12:53'),(2,'marydoe','Mary Doe','Enteract is here!','2022-11-26 08:13:47'),(3,'gabrieldeleon','Gabriel Anton de Leon','This is a post','2022-11-26 08:14:56'),(4,'johndoe','John Doe','Definitely not a \"Lorem ipsum\" post','2022-11-26 08:17:45'),(5,'johndoe','John Doe','!@#$%^&*()-=','2022-11-26 08:19:07');
 /*!40000 ALTER TABLE `posts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -52,16 +53,14 @@ DROP TABLE IF EXISTS `usercomments`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `usercomments` (
   `commentid` int NOT NULL AUTO_INCREMENT,
-  `userid` int NOT NULL,
   `postid` int NOT NULL,
-  `comment` varchar(255) COLLATE utf8mb3_bin DEFAULT NULL,
+  `name` varchar(45) NOT NULL,
+  `comment` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`commentid`),
   UNIQUE KEY `commentid_UNIQUE` (`commentid`),
   KEY `postid_idx` (`postid`),
-  KEY `usercommentstousersuserid` (`userid`),
-  CONSTRAINT `usercommentstouserspostid` FOREIGN KEY (`postid`) REFERENCES `posts` (`postid`),
-  CONSTRAINT `usercommentstousersuserid` FOREIGN KEY (`userid`) REFERENCES `users` (`userid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
+  CONSTRAINT `usercommentstouserspostid` FOREIGN KEY (`postid`) REFERENCES `posts` (`postid`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -70,36 +69,8 @@ CREATE TABLE `usercomments` (
 
 LOCK TABLES `usercomments` WRITE;
 /*!40000 ALTER TABLE `usercomments` DISABLE KEYS */;
+INSERT INTO `usercomments` VALUES (1,1,'Mary Doe','Hello!'),(2,3,'John Doe','This is a comment'),(3,5,'John Doe',',./;\'[]<>?:\"{}'),(5,3,'Gabriel Anton de Leon','This is another comment'),(6,2,'Mary Doe','Enter-act yay!');
 /*!40000 ALTER TABLE `usercomments` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `userfollows`
---
-
-DROP TABLE IF EXISTS `userfollows`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `userfollows` (
-  `followid` int NOT NULL AUTO_INCREMENT,
-  `userid` int NOT NULL,
-  `following` int NOT NULL,
-  PRIMARY KEY (`followid`),
-  UNIQUE KEY `followid_UNIQUE` (`followid`),
-  KEY `userid_idx` (`userid`) /*!80000 INVISIBLE */,
-  KEY `userfollowstousersfollowing_idx` (`following`),
-  CONSTRAINT `userfollowstousersfollowing` FOREIGN KEY (`following`) REFERENCES `users` (`userid`),
-  CONSTRAINT `userfollowstousersuserid` FOREIGN KEY (`userid`) REFERENCES `users` (`userid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `userfollows`
---
-
-LOCK TABLES `userfollows` WRITE;
-/*!40000 ALTER TABLE `userfollows` DISABLE KEYS */;
-/*!40000 ALTER TABLE `userfollows` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -111,15 +82,14 @@ DROP TABLE IF EXISTS `users`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `users` (
   `userid` int NOT NULL AUTO_INCREMENT,
-  `username` varchar(45) COLLATE utf8mb3_bin NOT NULL,
-  `password` varchar(45) COLLATE utf8mb3_bin NOT NULL,
-  `name` varchar(45) COLLATE utf8mb3_bin NOT NULL,
-  `email` varchar(45) COLLATE utf8mb3_bin NOT NULL,
-  `icon` blob,
+  `username` varchar(45) NOT NULL,
+  `password` varchar(45) NOT NULL,
+  `name` varchar(45) NOT NULL,
+  `email` varchar(45) NOT NULL,
   PRIMARY KEY (`userid`),
   UNIQUE KEY `username_UNIQUE` (`username`),
   UNIQUE KEY `email_UNIQUE` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -128,6 +98,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (2,'gabrieldeleon','12345','Gabriel Anton de Leon','gabriel_anton_deleon@dlsu.edu.ph'),(3,'juliadalipe','12345','Julia Bettina Dalipe','julia_dalipe@dlsu.edu.ph'),(4,'reecedepadua','12345','Reece Cendrick De Padua','reece_depadua@dlsu.edu.ph'),(5,'johndoe','12345','John Doe','johndoe@gmail.com'),(6,'marydoe','12345','Mary Doe','marydoe@gmail.com');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -140,4 +111,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-24  2:31:12
+-- Dump completed on 2022-11-26  8:23:02
