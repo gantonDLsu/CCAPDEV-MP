@@ -13,6 +13,9 @@
 </head>
 
 <body>
+    <% var isEditingPost; %>
+    <% var editPostID, editPostMessage; %>
+
     <!--Navbar-->
     <header class="blog-navbar">
         <img src="images/logo2.png" alt="Enter-Act Logo" onclick='location.href="enteract.ejs"'>
@@ -64,19 +67,35 @@
         <!--Blog Posting interface-->
         <div class="blog-posts">
             <div class="blog-outerdesign">
-                <form id="getaction" action="/posting" method="post">
-                    <div class="blog-innerdesign">
-                        <div class="usericon">
-                            <img src="images/usericon.png" alt="User Icon">
+                <% if (isEditingPost) { %> 
+                    <form id="getaction" action="/updatepost:<%=editPostID%>" method="post">
+                        <div class="blog-innerdesign">
+                            <div class="usericon">
+                                <img src="images/usericon.png" alt="User Icon">
+                            </div>
+                            <div class="username">
+                                <p id="profile"><%=Name %></p>
+                                <p id="user">@<%=userName %></p>
+                            </div>
+                            <textarea name="message" id="blog-post" cols="90" rows="20"><%=editPostMessage%></textarea>
                         </div>
-                        <div class="username">
-                            <p id="profile"><%=Name %></p>
-                            <p id="user">@<%=userName %></p>
+                        <button type="submit" class="button-post">Update</button> 
+                    </form>
+                <% } else { %> 
+                    <form id="getaction" action="/posting" method="post">
+                        <div class="blog-innerdesign">
+                            <div class="usericon">
+                                <img src="images/usericon.png" alt="User Icon">
+                            </div>
+                            <div class="username">
+                                <p id="profile"><%=Name %></p>
+                                <p id="user">@<%=userName %></p>
+                            </div>
+                            <textarea name="message" id="blog-post" cols="90" rows="20" placeholder="Write a post..."></textarea>
                         </div>
-                        <textarea name="message" id="blog-post" cols="90" rows="20" placeholder="Write a post..."></textarea>
-                    </div>
-                    <button type="submit" class="button-post">Post</button> 
-                </form>
+                        <button type="submit" class="button-post">Post</button> 
+                    </form>
+                <% } %>
                 <button class="button-cancel">CANCEL</button>
             </div>
             <!--Blog Entries-->
@@ -84,6 +103,9 @@
                 <% posts.forEach(function(post){ %>
                 <div class="entry">
                     <% if (userName == post.username) { %>
+                        <form action="/editpost:<%=post.postid%>" method="post">  
+                            <button type="submit" class="edit-button">Edit post</button>
+                        </form>
                         <form action="/deletepost:<%=post.postid%>" method="post">
                             <button type="submit" class="delete-button">Delete post</button>
                         </form>

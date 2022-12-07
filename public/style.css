@@ -990,6 +990,23 @@ video{
     color: #867E7E;
     margin-block-start: 0px;
 }
+.edit-button{
+    position: absolute;
+    width: fit-content;
+    margin-left: 730px;
+    margin-top: 10px;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    color: #867E7E;
+    padding: 0;
+    border: none;
+    background: none;
+    background-color: transparent;
+    border-color: transparent;
+    text-align: right;
+}
 .delete-button{
     position: absolute;
     width: fit-content;
@@ -1024,7 +1041,7 @@ video{
     border-color: transparent;
     text-align: right;
 }
-.delete-button:hover, .delete-comment:hover{
+.edit-button:hover, .delete-button:hover, .delete-comment:hover{
     text-decoration: underline;
     cursor: pointer;
 }

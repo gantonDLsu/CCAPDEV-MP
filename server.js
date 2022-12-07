@@ -38,6 +38,7 @@ let username;
 let userid;
 let posts;
 let comments = [];
+let arr = [];
 
 app.get("/", function (req, res){
     res.render("index");
@@ -85,17 +86,10 @@ app.post("/loginuser", function (req, res) {
             res.render("login", {errorMessage: "User not found"});
         }
         else {
-            let postquery = db.query("SELECT * FROM posts ORDER BY datetime DESC", (err, postresults) => {
-                name = result[0].name;
-                username = result[0].username;
-                userid = result[0].userid;
-                posts = postresults;
-                let commentquery = db.query("SELECT * FROM usercomments", (err, commentresults) => {
-                    comments = commentresults;
-                    // res.render("blogpage", {Name : name, userName : username, posts: posts, comments: comments});
-                    res.redirect("blogpage.ejs");
-                });
-            });
+            name = result[0].name;
+            username = result[0].username;
+            userid = result[0].userid;
+            res.redirect("blogpage.ejs");
         };
     });
 });
@@ -103,13 +97,17 @@ app.post("/loginuser", function (req, res) {
 app.get("/blogpage.ejs", function (req, res) {
     let query = db.query ("SELECT username FROM users", (err, result) => {
         if (err) throw err;
-        let arr = [];
         result.forEach(element => { arr.push(element.username); });
         arr.sort((a, b) => 0.5 - Math.random()).splice(3);
 
-        res.render("blogpage", {Name : name, userName : username, posts: posts, comments: comments, toFollow: arr});
+        let postquery = db.query("SELECT * FROM posts ORDER BY datetime DESC", (err, postresults) => {
+            posts = postresults;
+            let commentquery = db.query("SELECT * FROM usercomments", (err, commentresults) => {
+                comments = commentresults;
+                res.render("blogpage", {Name : name, userName : username, posts: posts, comments: comments, toFollow: arr, isEditingPost: false});
+            });
+        });
     });
-    
 });
 
 app.get("/aboutus.ejs", function (req, res){
@@ -180,6 +178,31 @@ app.post("/deletecomment:commentid", function (req, res){
             res.redirect("blogpage.ejs");
         });
     });
+});
+
+app.post("/editpost:postid", function (req, res){
+    let data = {
+        postid: parseInt(req.params.postid.slice(1))
+    };
+    let editpost = db.query("SELECT * FROM posts WHERE ?", data, (err, result) => {
+        if (err) throw err;
+
+        console.log(result[0].postid);
+
+        res.render("blogpage", {Name : name, userName : username, posts: posts, comments: comments, toFollow: arr, isEditingPost: true, editPostID: result[0].postid, editPostMessage: result[0].message});
+    })
+});
+
+app.post("/updatepost:postid", function (req, res){
+    let data = {
+        postid: parseInt(req.params.postid.slice(1))
+    };
+    let sql = "UPDATE posts SET message = \"" + req.body.message + "\" WHERE ?";
+    console.log(sql);
+    let editpost = db.query(sql, data, (err, result) => {
+        if (err) throw err;
+    });
+    res.redirect("blogpage.ejs");
 });
 
 app.listen(3000, () => console.log('listening on port 3000!')); 
