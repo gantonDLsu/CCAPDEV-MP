@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&family=Poppins&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>Enter-Act</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="buttonfunctions.js"></script>
+</head>
+
+<body>
+    <% var isEditingPost; %>
+    <% var editPostID, editPostMessage; %>
+
+    <!--Navbar-->
+    <header class="blog-navbar">
+        <img src="images/logo2.png" alt="Enter-Act Logo" onclick='location.href="enteract.ejs"'>
+        <span>Enter Act</span>
+        <nav>
+            <ul>
+                <li>Home</li>
+                <li>My Profile</li>
+                <li>Settings</li>
+            </ul>
+        </nav>
+        <div id="post">Post a Blog</div>
+    </header>
+    <!--Contents of the Blog-->
+    <div class="blog-content">
+        <div class="blog-trending">
+            <p>What's Trending:</p>
+            <img src="images/Vector1.png" alt="">
+            <div class="trending-box">
+                <!--Trending Topics-->
+                <nav id="topics">
+                    <ul>
+                        <li><a href="https://www.doh.gov.ph/covid19tracker" target="_blank">COVID-19</a></li>
+                        <li><a href="https://genshin.hoyoverse.com/en/" target="_blank">GENSHIN IMPACT</a></li>
+                        <li><a href="https://www.dlsu.edu.ph/" target="_blank">DLSU</a></li>
+                    </ul>
+                </nav>
+                <hr>
+                <!--Trending Hashtags-->
+                <nav id="hashtags">
+                    <ul>
+                        <li>#TIKTOK</li>
+                        <li>#VALORANT</li>
+                        <li>#SPORTS</li>
+                    </ul>
+                </nav>
+                <hr>
+                <!--Who to Follow-->
+                <h2>who to follow:</h2>
+                <nav id="users">
+                    <ul>
+                        <li>@<%= toFollow[0] %></li>
+                        <li>@<%= toFollow[1] %></li>
+                        <li>@<%= toFollow[2] %></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <!--Blog Posting interface-->
+        <div class="blog-posts">
+            <div class="blog-outerdesign">
+                <% if (isEditingPost) { %> 
+                    <form id="getaction" action="/updatepost:<%=editPostID%>" method="post">
+                        <div class="blog-innerdesign">
+                            <div class="usericon">
+                                <img src="images/usericon.png" alt="User Icon">
+                            </div>
+                            <div class="username">
+                                <p id="profile"><%=Name %></p>
+                                <p id="user">@<%=userName %></p>
+                            </div>
+                            <textarea name="message" id="blog-post" cols="90" rows="20"><%=editPostMessage%></textarea>
+                        </div>
+                        <button type="submit" class="button-post">Update</button> 
+                    </form>
+                    <button class="button-cancel" onclick="location.href='blogpage.ejs'">CANCEL</button>
+                <% } else { %> 
+                    <form id="getaction" action="/posting" method="post">
+                        <div class="blog-innerdesign">
+                            <div class="usericon">
+                                <img src="images/usericon.png" alt="User Icon">
+                            </div>
+                            <div class="username">
+                                <p id="profile"><%=Name %></p>
+                                <p id="user">@<%=userName %></p>
+                            </div>
+                            <textarea name="message" id="blog-post" cols="90" rows="20" placeholder="Write a post..."></textarea>
+                        </div>
+                        <button type="submit" class="button-post">Post</button> 
+                    </form>
+                    <button class="button-cancel">CANCEL</button>
+                    <button type="submit" class="button-post-img">
+                        <img src="images/image.png" alt="Image Icon">
+                    </button>
+                    <button type="submit" class="button-post-video">
+                        <img src="images/video.png" alt="Video Icon">
+                    </button>
+                    <button type="submit" class="button-post-audio">
+                        <img src="images/audio.png" alt="Audio Icon">
+                    </button>
+                <% } %>
+            </div>
+            <!--Blog Entries-->
+            <div class="blog-entries">
+                <% posts.forEach(function(post){ %>
+                <div class="entry">
+                    <% if (userName == post.username) { %>
+                        <form action="/editpost:<%=post.postid%>" method="post">  
+                            <button type="submit" class="edit-button">Edit post</button>
+                        </form>
+                        <form action="/deletepost:<%=post.postid%>" method="post">
+                            <button type="submit" class="delete-button">Delete post</button>
+                        </form>
+                    <% } %>
+                    <div class="entry-post">
+                        <div class="postusericon">
+                            <img src="images/usericon.png" alt="User Icon">
+                        </div>
+                        <div class="postusername">
+                            <p id="profile"><%= post.name %></p>
+                            <p id="user">@<%= post.username %></p>
+                        </div>
+                        <p class="post"><%= post.message %></p>
+                    </div>
+                    <form action="/addcomment:<%= post.postid %>" method="post">
+                        <textarea name="comment" id="comment" placeholder="Write a comment..."></textarea>
+                        <button type="submit" class="comment-button">Comment</button>
+                    </form>
+                    <% comments.forEach(function (comment) { %>
+                        <% if (post.postid == comment.postid) { %>
+                        <div class="entry-reply">
+                            <% if (Name == comment.name || userName == post.username) { %>
+                                <form action="/deletecomment:<%=comment.commentid%>" method="post">
+                                    <button type="submit" class="delete-comment">Delete</button>
+                                </form>
+                            <% } %>
+                            <p id="replyuser"><%= comment.name %></p>
+                            <p id="reply"><%= comment.comment %></p>
+                        </div>
+                        <% }; %>
+                    <% }); %>
+                </div>
+                <% }); %>
+            </div>
+            <div class="blog-highlights">
+                <div class="highlight-box">
+                    <span id="title">Highlights:</span>
+                    <div class="highlight-sports">
+                        <img src="images/sports.png" alt="Girls playing soccer" onclick="window.open('//news.abs-cbn.com/sports', '_blank');">
+                        <span>#SPORTS</span>
+                    </div>
+                    <div class="highlight-games">
+                        <img src="images/valo1.png" alt="Valorant Image" onclick="window.open('//playvalorant.com/en-us/', '_blank');">
+                       <img src="images/valo2.png" alt="Valorant Image" onclick="window.open('//playvalorant.com/en-us/', '_blank');">
+                        <span>#GAMES</span>
+                    </div>
+                    <hr>
+                    <div class="highlight-news">
+                        <span>News:</span>
+                        <img src="images/news.png" alt="Breaking News" onclick="window.open('//news.abs-cbn.com/', '_blank');">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        $(".button-cancel").click(function () {
+            $("#blog-post").val("");
+        });
+    </script>
+</body>
+
+</html>
