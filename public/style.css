@@ -914,6 +914,54 @@ video{
     text-decoration: underline;
     cursor: pointer;
 }
+.button-post-img{
+    box-sizing: border-box;
+    border: 1px solid black;
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    top: 485px;
+    left: 250px;
+    overflow: hidden;
+}
+.button-post-img:hover, .button-post-audio:hover, .button-post-video:hover{
+    box-shadow: 5px 5px 5px grey;
+    line-height: 30px;
+    cursor: pointer;
+}
+.button-post-img img{
+    width: 30px;
+    height: 30px;   
+}
+
+.button-post-video{
+    box-sizing: border-box;
+    border: 1px solid black;
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    top: 485px;
+    left: 350px;
+    overflow: hidden;
+}
+.button-post-video img{
+    width: 30px;
+    height: 30px;   
+}
+.button-post-audio{
+    box-sizing: border-box;
+    border: 1px solid black;
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    top: 485px;
+    left: 450px;
+    overflow: hidden;
+}
+.button-post-audio img{
+    width: 30px;
+    height: 30px;   
+}
 .button-draft{
     position: absolute;
     width: 166px;
