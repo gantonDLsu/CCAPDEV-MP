@@ -81,6 +81,7 @@
                         </div>
                         <button type="submit" class="button-post">Update</button> 
                     </form>
+                    <button class="button-cancel" onclick="location.href='blogpage.ejs'">CANCEL</button>
                 <% } else { %> 
                     <form id="getaction" action="/posting" method="post">
                         <div class="blog-innerdesign">
@@ -95,17 +96,17 @@
                         </div>
                         <button type="submit" class="button-post">Post</button> 
                     </form>
+                    <button class="button-cancel">CANCEL</button>
+                    <button type="submit" class="button-post-img">
+                        <img src="images/image.png" alt="Image Icon">
+                    </button>
+                    <button type="submit" class="button-post-video">
+                        <img src="images/video.png" alt="Video Icon">
+                    </button>
+                    <button type="submit" class="button-post-audio">
+                        <img src="images/audio.png" alt="Audio Icon">
+                    </button>
                 <% } %>
-                <button class="button-cancel">CANCEL</button>
-                <button type="submit" class="button-post-img">
-                    <img src="images/image.png" alt="Image Icon">
-                </button>
-                <button type="submit" class="button-post-video">
-                    <img src="images/video.png" alt="Video Icon">
-                </button>
-                <button type="submit" class="button-post-audio">
-                    <img src="images/audio.png" alt="Audio Icon">
-                </button>
             </div>
             <!--Blog Entries-->
             <div class="blog-entries">
