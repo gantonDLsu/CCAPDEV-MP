@@ -65,7 +65,6 @@ app.post("/adduser", function (req, res){
             if (err) throw err;
         }
         catch (err) {
-            console.log(err);
             res.render("signup", {errorMessage: err});
             return;
         };
@@ -187,8 +186,6 @@ app.post("/editpost:postid", function (req, res){
     let editpost = db.query("SELECT * FROM posts WHERE ?", data, (err, result) => {
         if (err) throw err;
 
-        console.log(result[0].postid);
-
         res.render("blogpage", {Name : name, userName : username, posts: posts, comments: comments, toFollow: arr, isEditingPost: true, editPostID: result[0].postid, editPostMessage: result[0].message});
     })
 });
@@ -198,7 +195,6 @@ app.post("/updatepost:postid", function (req, res){
         postid: parseInt(req.params.postid.slice(1))
     };
     let sql = "UPDATE posts SET message = \"" + req.body.message + "\" WHERE ?";
-    console.log(sql);
     let editpost = db.query(sql, data, (err, result) => {
         if (err) throw err;
     });
