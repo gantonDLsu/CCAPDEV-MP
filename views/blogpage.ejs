@@ -54,9 +54,9 @@
                 <h2>who to follow:</h2>
                 <nav id="users">
                     <ul>
-                        <li>@ValorINTEL</li>
-                        <li>@ChelDiokno</li>
-                        <li>@Itssassagurl</li>
+                        <li>@<%= toFollow[0] %></li>
+                        <li>@<%= toFollow[1] %></li>
+                        <li>@<%= toFollow[2] %></li>
                     </ul>
                 </nav>
             </div>
@@ -83,9 +83,11 @@
             <div class="blog-entries">
                 <% posts.forEach(function(post){ %>
                 <div class="entry">
-                    <form action="/deletepost:<%=post.postid%>" method="post">
-                        <button type="submit" class="delete-button">Delete post</button>
-                    </form>
+                    <% if (userName == post.username) { %>
+                        <form action="/deletepost:<%=post.postid%>" method="post">
+                            <button type="submit" class="delete-button">Delete post</button>
+                        </form>
+                    <% } %>
                     <div class="entry-post">
                         <div class="postusericon">
                             <img src="images/usericon.png" alt="User Icon">
@@ -103,9 +105,11 @@
                     <% comments.forEach(function (comment) { %>
                         <% if (post.postid == comment.postid) { %>
                         <div class="entry-reply">
-                            <form action="/deletecomment:<%=comment.commentid%>" method="post">
-                                <button type="submit" class="delete-comment">Delete</button>
-                            </form>
+                            <% if (Name == comment.name || userName == post.username) { %>
+                                <form action="/deletecomment:<%=comment.commentid%>" method="post">
+                                    <button type="submit" class="delete-comment">Delete</button>
+                                </form>
+                            <% } %>
                             <p id="replyuser"><%= comment.name %></p>
                             <p id="reply"><%= comment.comment %></p>
                         </div>

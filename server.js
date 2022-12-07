@@ -92,7 +92,8 @@ app.post("/loginuser", function (req, res) {
                 posts = postresults;
                 let commentquery = db.query("SELECT * FROM usercomments", (err, commentresults) => {
                     comments = commentresults;
-                    res.render("blogpage", {Name : name, userName : username, posts: posts, comments: comments});
+                    // res.render("blogpage", {Name : name, userName : username, posts: posts, comments: comments});
+                    res.redirect("blogpage.ejs");
                 });
             });
         };
@@ -100,7 +101,15 @@ app.post("/loginuser", function (req, res) {
 });
 
 app.get("/blogpage.ejs", function (req, res) {
-    res.render("blogpage", {Name : name, userName : username, posts: posts, comments: comments});
+    let query = db.query ("SELECT username FROM users", (err, result) => {
+        if (err) throw err;
+        let arr = [];
+        result.forEach(element => { arr.push(element.username); });
+        arr.sort((a, b) => 0.5 - Math.random()).splice(3);
+
+        res.render("blogpage", {Name : name, userName : username, posts: posts, comments: comments, toFollow: arr});
+    });
+    
 });
 
 app.get("/aboutus.ejs", function (req, res){
@@ -120,7 +129,8 @@ app.post("/posting", function (req, res){
         if (err) throw err;
         let postquery = db.query("SELECT * FROM posts ORDER BY postid DESC", (err, results) => {
             posts = results;
-            res.render("blogpage", {Name : name, userName : username, posts: posts, comments: comments});
+            // res.render("blogpage", {Name : name, userName : username, posts: posts, comments: comments});
+            res.redirect("blogpage.ejs");
         });
     });
 });
@@ -135,7 +145,7 @@ app.post("/addcomment:postid", function (req, res){
         if (err) throw err;
         let commentquery = db.query("SELECT * FROM usercomments", (err, commentresults) => {
             comments = commentresults;
-            res.render("blogpage", {Name : name, userName : username, posts: posts, comments: comments});
+            res.redirect("blogpage.ejs");
         });
     })
 });
@@ -154,7 +164,7 @@ app.post("/deletepost:postid", function (req, res){
         if (err) throw err;
         let postquery = db.query("SELECT * FROM posts ORDER BY postid DESC", (err, results) => {
             posts = results;
-            res.render("blogpage", {Name : name, userName : username, posts: posts, comments: comments});
+            res.redirect("blogpage.ejs");
         });
     });
 });
@@ -167,7 +177,7 @@ app.post("/deletecomment:commentid", function (req, res){
         if (err) throw err;
         let commentquery = db.query("SELECT * FROM usercomments", (err, results) => {
             comments = results;
-            res.render("blogpage", {Name : name, userName : username, posts: posts, comments: comments});
+            res.redirect("blogpage.ejs");
         });
     });
 });
