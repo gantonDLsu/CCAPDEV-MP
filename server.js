@@ -10,7 +10,11 @@ const app = express();
 const db = mysql.createConnection({
     host     : 'localhost',
     user     : 'root',
+<<<<<<< HEAD
     password : 'Hope2714612!', //CHANGE ACCORDING TO YOUR WORKBENCH PASSWORD
+=======
+    password : 'password123', //CHANGE ACCORDING TO YOUR WORKBENCH PASSWORD
+>>>>>>> aa7a6913b0d26a3e7d07ddf3bb147bc77168501f
     database : 'enteract', // input database name
   });
   
