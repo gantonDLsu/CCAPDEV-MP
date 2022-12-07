@@ -145,7 +145,7 @@ app.post("/addcomment:postid", function (req, res){
         if (err) throw err;
         let commentquery = db.query("SELECT * FROM usercomments", (err, commentresults) => {
             comments = commentresults;
-            res.render("blogpage", {Name : name, userName : username, posts: posts, comments: comments});
+            res.redirect("blogpage.ejs");
         });
     })
 });
@@ -164,7 +164,7 @@ app.post("/deletepost:postid", function (req, res){
         if (err) throw err;
         let postquery = db.query("SELECT * FROM posts ORDER BY postid DESC", (err, results) => {
             posts = results;
-            res.render("blogpage", {Name : name, userName : username, posts: posts, comments: comments});
+            res.redirect("blogpage.ejs");
         });
     });
 });
@@ -177,7 +177,7 @@ app.post("/deletecomment:commentid", function (req, res){
         if (err) throw err;
         let commentquery = db.query("SELECT * FROM usercomments", (err, results) => {
             comments = results;
-            res.render("blogpage", {Name : name, userName : username, posts: posts, comments: comments});
+            res.redirect("blogpage.ejs");
         });
     });
 });

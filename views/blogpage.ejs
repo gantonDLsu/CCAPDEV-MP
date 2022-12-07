@@ -105,9 +105,11 @@
                     <% comments.forEach(function (comment) { %>
                         <% if (post.postid == comment.postid) { %>
                         <div class="entry-reply">
-                            <form action="/deletecomment:<%=comment.commentid%>" method="post">
-                                <button type="submit" class="delete-comment">Delete</button>
-                            </form>
+                            <% if (Name == comment.name || userName == post.username) { %>
+                                <form action="/deletecomment:<%=comment.commentid%>" method="post">
+                                    <button type="submit" class="delete-comment">Delete</button>
+                                </form>
+                            <% } %>
                             <p id="replyuser"><%= comment.name %></p>
                             <p id="reply"><%= comment.comment %></p>
                         </div>
