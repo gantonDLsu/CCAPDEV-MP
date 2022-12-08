@@ -26,8 +26,11 @@ CREATE TABLE `posts` (
   `postid` int NOT NULL AUTO_INCREMENT,
   `username` varchar(45) NOT NULL,
   `name` varchar(45) NOT NULL,
-  `message` varchar(255) NOT NULL,
+  `message` text,
   `datetime` datetime NOT NULL,
+  `media` longtext,
+  `mediatype` text,
+  `usershare` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`postid`),
   KEY `userid_idx` (`username`),
   CONSTRAINT `poststousersusername` FOREIGN KEY (`username`) REFERENCES `users` (`username`)
@@ -40,7 +43,7 @@ CREATE TABLE `posts` (
 
 LOCK TABLES `posts` WRITE;
 /*!40000 ALTER TABLE `posts` DISABLE KEYS */;
-INSERT INTO `posts` VALUES (1,'johndoe','John Doe','Hello world','2022-11-26 08:12:53'),(2,'marydoe','Mary Doe','Enteract is here!','2022-11-26 08:13:47'),(3,'gabrieldeleon','Gabriel Anton de Leon','This is a post','2022-11-26 08:14:56'),(4,'johndoe','John Doe','Definitely not a \"Lorem ipsum\" post','2022-11-26 08:17:45'),(5,'johndoe','John Doe','!@#$%^&*()-=','2022-11-26 08:19:07');
+INSERT INTO `posts` VALUES (1,'johndoe','John Doe','Hello world','2022-11-26 08:12:53',NULL,NULL,NULL),(2,'marydoe','Mary Doe','Enteract is here!','2022-11-26 08:13:47',NULL,NULL,NULL),(3,'gabrieldeleon','Gabriel Anton de Leon','This is an updated post','2022-11-26 08:14:56',NULL,NULL,NULL),(4,'johndoe','John Doe','Definitely not a \"Lorem ipsum\" post','2022-11-26 08:17:45',NULL,NULL,NULL),(5,'johndoe','John Doe','!@#$%^&*()-=','2022-11-26 08:19:07',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `posts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -60,7 +63,7 @@ CREATE TABLE `usercomments` (
   UNIQUE KEY `commentid_UNIQUE` (`commentid`),
   KEY `postid_idx` (`postid`),
   CONSTRAINT `usercommentstouserspostid` FOREIGN KEY (`postid`) REFERENCES `posts` (`postid`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -69,7 +72,7 @@ CREATE TABLE `usercomments` (
 
 LOCK TABLES `usercomments` WRITE;
 /*!40000 ALTER TABLE `usercomments` DISABLE KEYS */;
-INSERT INTO `usercomments` VALUES (1,1,'Mary Doe','Hello!'),(2,3,'John Doe','This is a comment'),(3,5,'John Doe',',./;\'[]<>?:\"{}'),(5,3,'Gabriel Anton de Leon','This is another comment'),(6,2,'Mary Doe','Enter-act yay!');
+INSERT INTO `usercomments` VALUES (1,1,'Mary Doe','Hello!'),(2,3,'John Doe','This is a comment'),(3,5,'John Doe',',./;\'[]<>?:\"{}'),(5,3,'Gabriel Anton de Leon','This is another comment'),(6,2,'Mary Doe','Enter-act yay!'),(9,5,'Gabriel Anton de Leon','test comment');
 /*!40000 ALTER TABLE `usercomments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -83,13 +86,13 @@ DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `userid` int NOT NULL AUTO_INCREMENT,
   `username` varchar(45) NOT NULL,
-  `password` varchar(45) NOT NULL,
+  `password` varchar(255) DEFAULT NULL,
   `name` varchar(45) NOT NULL,
   `email` varchar(45) NOT NULL,
   PRIMARY KEY (`userid`),
   UNIQUE KEY `username_UNIQUE` (`username`),
   UNIQUE KEY `email_UNIQUE` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -98,7 +101,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (2,'gabrieldeleon','12345','Gabriel Anton de Leon','gabriel_anton_deleon@dlsu.edu.ph'),(3,'juliadalipe','12345','Julia Bettina Dalipe','julia_dalipe@dlsu.edu.ph'),(4,'reecedepadua','12345','Reece Cendrick De Padua','reece_depadua@dlsu.edu.ph'),(5,'johndoe','12345','John Doe','johndoe@gmail.com'),(6,'marydoe','12345','Mary Doe','marydoe@gmail.com');
+INSERT INTO `users` VALUES (2,'gabrieldeleon','12345','Gabriel Anton de Leon','gabriel_anton_deleon@dlsu.edu.ph'),(3,'juliadalipe','12345','Julia Bettina Dalipe','julia_dalipe@dlsu.edu.ph'),(4,'reecedepadua','12345','Reece Cendrick De Padua','reece_depadua@dlsu.edu.ph'),(5,'johndoe','12345','John Doe','johndoe@gmail.com'),(6,'marydoe','12345','Mary Doe','marydoe@gmail.com'),(20,'test','$2b$10$sdTxhO80jeYN76vGKmJ.s.Cwb6xdKjHvNbqhwaAfkJ.cwMWjnGu3S','test','test@email.com');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -111,4 +114,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-26  8:23:02
+-- Dump completed on 2022-12-08 20:01:32
