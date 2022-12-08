@@ -4,22 +4,17 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-<<<<<<< HEAD
     "start": "nodemon server.js"
-=======
-   "start": "nodemon server.js"
->>>>>>> aa7a6913b0d26a3e7d07ddf3bb147bc77168501f
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.1.0",
     "body-parser": "^1.20.1",
     "ejs": "^3.1.8",
-<<<<<<< HEAD
     "express": "^4.18.2",
-=======
->>>>>>> aa7a6913b0d26a3e7d07ddf3bb147bc77168501f
     "express.js": "^1.0.0",
+    "multer": "^1.4.5-lts.1",
     "mysql": "^2.18.1",
     "nodemon": "^2.0.20"
   }

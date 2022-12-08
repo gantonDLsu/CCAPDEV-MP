@@ -83,7 +83,7 @@
                     </form>
                     <button class="button-cancel" onclick="location.href='blogpage.ejs'">CANCEL</button>
                 <% } else { %> 
-                    <form id="getaction" action="/posting" method="post">
+                    <form id="getaction" action="/posting" enctype="multipart/form-data" method="post">
                         <div class="blog-innerdesign">
                             <div class="usericon">
                                 <img src="images/usericon.png" alt="User Icon">
@@ -94,18 +94,25 @@
                             </div>
                             <textarea name="message" id="blog-post" cols="90" rows="20" placeholder="Write a post..."></textarea>
                         </div>
+                        <input type="file" name="media" id="button-post-img" accept="image/*" onchange="loadFile(event)">
+                        <input type="file" name="media" id="button-post-video" accept="video/*" onchange="loadFile(event)">
+                        <input type="file" name="media" id="button-post-audio" accept="audio/*" onchange="loadFile(event)">
+
                         <button type="submit" class="button-post">Post</button> 
                     </form>
+                    <image id="post-image" src="#"></image>
+                    <video id="post-video" src="#" controls></video>
+                    <audio id="post-audio" src="#" controls></audio>
                     <button class="button-cancel">CANCEL</button>
-                    <button type="submit" class="button-post-img">
+                    <label for="button-post-img" class="button-post-img">
                         <img src="images/image.png" alt="Image Icon">
-                    </button>
-                    <button type="submit" class="button-post-video">
+                    </label>
+                    <label for="button-post-video" class="button-post-video">
                         <img src="images/video.png" alt="Video Icon">
-                    </button>
-                    <button type="submit" class="button-post-audio">
+                    </label>
+                    <label for="button-post-audio" class="button-post-audio">
                         <img src="images/audio.png" alt="Audio Icon">
-                    </button>
+                    </label>
                 <% } %>
             </div>
             <!--Blog Entries-->
@@ -129,7 +136,19 @@
                             <p id="user">@<%= post.username %></p>
                         </div>
                         <p class="post"><%= post.message %></p>
+                        <% if (post.media != null) { %>
+                            <% if (post.mediatype.search("image") == 0) {%>
+                                <img src="data:<%= post.mediatype %>;base64,<%= post.media %>" alt="Embedded Media" id="post-media"/>
+                            <% } %>
+                            <% if (post.mediatype.search("video") == 0) {%>
+                                <video src="data:<%= post.mediatype %>;base64,<%= post.media %>" alt="Embedded Media" id="post-media" controls></video>
+                            <% } %>
+                            <% if (post.mediatype.search("audio") == 0) {%>
+                                <audio src="data:<%= post.mediatype %>;base64,<%= post.media %>" alt="Embedded Media" id="post-media" controls></audio>
+                            <% } %>
+                        <% } %>
                     </div>
+
                     <form action="/addcomment:<%= post.postid %>" method="post">
                         <textarea name="comment" id="comment" placeholder="Write a comment..."></textarea>
                         <button type="submit" class="comment-button">Comment</button>
@@ -176,6 +195,61 @@
         $(".button-cancel").click(function () {
             $("#blog-post").val("");
         });
+
+        var image = document.getElementById('post-image');
+        var video = document.getElementById('post-video');
+        var audio = document.getElementById('post-audio');
+
+        var loadFile = function(event) {
+            if (event.target.files[0].type.search("image") == 0) {
+                image.style.display = "block";
+                video.style.display = "none";
+                audio.style.display = "none";
+
+                $(".blog-outerdesign").css("height","1065");
+                $(".blog-entries").css("top","1100px");
+
+	            image.src = URL.createObjectURL(event.target.files[0]);
+
+                video.src = "#";
+                $("#button-post-video").replaceWith($("#button-post-video").val('').clone(true));
+
+                audio.src = "#";
+                $("#button-post-audio").replaceWith($("#button-post-audio").val('').clone(true));
+            }
+            else if (event.target.files[0].type.search("video") == 0) {
+                image.style.display = "none";
+                video.style.display = "block";
+                audio.style.display = "none";
+
+                $(".blog-outerdesign").css("height","1065");
+                $(".blog-entries").css("top","1100px");
+
+                image.src = "#";
+                $("#button-post-image").replaceWith($("#button-post-image").val('').clone(true));
+
+	            video.src = URL.createObjectURL(event.target.files[0]);
+
+                audio.src = "#";
+                $("#button-post-audio").replaceWith($("#button-post-audio").val('').clone(true));
+            }
+            else if (event.target.files[0].type.search("audio") == 0) {
+                image.style.display = "none";
+                video.style.display = "none";
+                audio.style.display = "block";
+                $(".blog-outerdesign").css("height","615");
+                $(".blog-entries").css("top","650px");
+
+                image.src = "#";
+                $("#button-post-image").replaceWith($("#button-post-image").val('').clone(true));
+
+                video.src = "#";
+                $("#button-post-video").replaceWith($("#button-post-video").val('').clone(true));
+
+	            audio.src = URL.createObjectURL(event.target.files[0]);
+            };
+            console.log($("#button-post-video").val());
+        };
     </script>
 </body>
 

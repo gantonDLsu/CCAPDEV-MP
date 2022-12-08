@@ -3,18 +3,15 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
 const { render } = require('ejs');
- 
+const bcrypt = require('bcrypt');
+const multer = require('multer');
 
 const app = express();
 
 const db = mysql.createConnection({
     host     : 'localhost',
     user     : 'root',
-<<<<<<< HEAD
-    password : 'Hope2714612!', //CHANGE ACCORDING TO YOUR WORKBENCH PASSWORD
-=======
     password : 'password123', //CHANGE ACCORDING TO YOUR WORKBENCH PASSWORD
->>>>>>> aa7a6913b0d26a3e7d07ddf3bb147bc77168501f
     database : 'enteract', // input database name
   });
   
@@ -27,6 +24,7 @@ const db = mysql.createConnection({
       console.log('connected as id' + db.threadId);
   });
   
+const upload = multer({storage:multer.memoryStorage()});
 
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended:true}));
@@ -55,32 +53,66 @@ app.get("/signup.ejs", function (req, res){
     res.render("signup", {errorMessage: null});
 });
 
-app.post("/adduser", function (req, res){
-    let data = {
-        name: req.body.name, 
-        email: req.body.email, 
-        username: req.body.username,
-        password: req.body.password,
-    };
 
-    let sql = "INSERT INTO users SET ?";
-    let query = db.query(sql, data, (err, results) => {
-        try {
-            if (err) throw err;
-        }
-        catch (err) {
-            res.render("signup", {errorMessage: err});
-            return;
+app.post("/adduser", async (req, res) => {
+    try {
+        // HASHING
+        const salt = await bcrypt.genSalt();
+        const hashedPassword = await bcrypt.hash(req.body.password, salt);
+        console.log(salt);
+        console.log(hashedPassword);
+
+        // DATA
+        let data = {
+            name: req.body.name, 
+            email: req.body.email, 
+            username: req.body.username,
+            password: hashedPassword,
         };
-        res.render("login", {errorMessage: "You must login first after signing in."});
-    });
+    
+        let sql = "INSERT INTO users SET ?";
+        let query = db.query(sql, data, (err, results) => {
+            try {
+                if (err) throw err;
+            }
+            catch (err) {
+                res.render("signup", {errorMessage: err});
+                return;
+            };
+            res.render("login", {errorMessage: "You must login first after signing in."});
+        });
+    } catch {
+        res.status(500).send(0);
+    }
 });
+
+
+// app.post("/adduser", function (req, res){
+//     let data = {
+//         name: req.body.name, 
+//         email: req.body.email, 
+//         username: req.body.username,
+//         password: req.body.password,
+//     };
+
+//     let sql = "INSERT INTO users SET ?";
+//     let query = db.query(sql, data, (err, results) => {
+//         try {
+//             if (err) throw err;
+//         }
+//         catch (err) {
+//             res.render("signup", {errorMessage: err});
+//             return;
+//         };
+//         res.render("login", {errorMessage: "You must login first after signing in."});
+//     });
+// });
 
 app.get("/login.ejs", function (req, res){
     res.render("login", {errorMessage: null});
 });
 
-app.post("/loginuser", function (req, res) {
+app.post("/loginuser", (req, res) => {
     let sql = "SELECT * FROM users WHERE username='"+req.body.username+"' AND password='"+req.body.password+"'";
     let query = db.query(sql, (err, result) => {
         if (err) throw err;
@@ -117,20 +149,21 @@ app.get("/aboutus.ejs", function (req, res){
     res.render("aboutus");
 });
 
-app.post("/posting", function (req, res){
+app.post("/posting", upload.single('media'), function (req, res){
     const today = new Date();
     let data = {
         username: username,
         name: name,
         message: req.body.message,
         datetime: today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()+' '+today.getHours()+':'+today.getMinutes()+':'+today.getSeconds(),
+        media: req.file.buffer.toString('base64'),
+        mediatype: req.file.mimetype
     };
     let sql = "INSERT INTO posts SET ?";
     let query = db.query(sql, data, (err, results) => {
         if (err) throw err;
         let postquery = db.query("SELECT * FROM posts ORDER BY postid DESC", (err, results) => {
             posts = results;
-            // res.render("blogpage", {Name : name, userName : username, posts: posts, comments: comments});
             res.redirect("blogpage.ejs");
         });
     });
