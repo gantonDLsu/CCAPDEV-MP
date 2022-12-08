@@ -126,6 +126,21 @@
                         <form action="/deletepost:<%=post.postid%>" method="post">
                             <button type="submit" class="delete-button">Delete post</button>
                         </form>
+                    <% } else { %>
+                        <% if (Name == post.usershare) { %>
+                            <form action="/deletepost:<%=post.postid%>" method="post">
+                                <button type="submit" class="delete-button">Delete post</button>
+                            </form>
+                        <% } else { %>
+                            <form action="/sharepost:<%=post.postid%>" method="post">
+                                <button type="submit" class="share-button">Share post</button>
+                            </form>
+                        <% } %>
+                    <% } %>
+                    <% if (post.usershare != null) { %>
+                        <div class="shared-post">
+                            <p><%=post.usershare%> shared <%=post.name%>'s post</p>
+                        </div>
                     <% } %>
                     <div class="entry-post">
                         <div class="postusericon">
@@ -148,7 +163,6 @@
                             <% } %>
                         <% } %>
                     </div>
-
                     <form action="/addcomment:<%= post.postid %>" method="post">
                         <textarea name="comment" id="comment" placeholder="Write a comment..."></textarea>
                         <button type="submit" class="comment-button">Comment</button>

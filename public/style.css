@@ -1013,6 +1013,8 @@ nav{
 .entry {
     background: #F4F4F4;
     width: 885px;
+    margin-top: 10px;
+    padding-top: 40px;
     /* height: 667px; */
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 15px;
@@ -1020,12 +1022,28 @@ nav{
     margin-bottom: 5px;
 }
 .entry-post{
+    position: relative;
     width: 806px;
     height: fit-content;
     margin-left: 40px;
-    margin-top: 42px;
+    /* margin-top: 42px; */
     background: #FFFFFF;
     box-sizing: border-box;
+}
+.shared-post{
+    width: 806px;
+    height: 30px;
+    margin-left: 40px;
+    background: white;
+}
+.shared-post p{
+    font-family: 'Poppins';
+    margin-left: 10px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 19px;
+    color: #867E7E;
+    margin-block-start: 0px;
 }
 .postusericon{
     position: absolute;
@@ -1038,7 +1056,7 @@ nav{
     width: 300px;
     height: 100px;
     margin-left: 100px;
-    margin-top: 10px;
+    /* margin-top: 10px; */
     margin-bottom: 0px;
 }
 .postusername #profile{
@@ -1046,10 +1064,11 @@ nav{
     font-style: normal;
     font-weight: 700;
     font-size: 25px;
-    line-height: 38px;
+    /* line-height: 38px; */
     color: #023047;
     padding-top: 20px;
     margin-block-end: 0px;
+    margin-block-start: 0px;
 }
 .postusername #user{
     font-family: 'Poppins';
@@ -1064,7 +1083,7 @@ nav{
 .edit-button{
     position: absolute;
     width: fit-content;
-    margin-left: 730px;
+    margin-left: 690px;
     margin-top: 10px;
     font-family: 'Poppins';
     font-style: normal;
@@ -1077,11 +1096,12 @@ nav{
     background-color: transparent;
     border-color: transparent;
     text-align: right;
+    z-index: 1;
 }
-.delete-button{
+.delete-button, .share-button{
     position: absolute;
     width: fit-content;
-    margin-left: 800px;
+    margin-left: 760px;
     margin-top: 10px;
     font-family: 'Poppins';
     font-style: normal;
@@ -1094,6 +1114,7 @@ nav{
     background-color: transparent;
     border-color: transparent;
     text-align: right;
+    z-index: 1;
 }
 .delete-comment{
     position: absolute;
@@ -1112,7 +1133,7 @@ nav{
     border-color: transparent;
     text-align: right;
 }
-.edit-button:hover, .delete-button:hover, .delete-comment:hover{
+.edit-button:hover, .delete-button:hover, .delete-comment:hover, .share-button:hover{
     text-decoration: underline;
     cursor: pointer;
 }

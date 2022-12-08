@@ -1,3 +1,4 @@
+const dotenv = require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
@@ -5,6 +6,7 @@ const mysql = require('mysql');
 const { render } = require('ejs');
 const bcrypt = require('bcrypt');
 const multer = require('multer');
+const session = require('express-session');
 
 const app = express();
 
@@ -41,6 +43,12 @@ let userid;
 let posts;
 let comments = [];
 let arr = [];
+
+app.use(session({
+    secret: process.env.SECRET, 
+    resave: false,
+    saveUninitialized: false
+}))
 
 app.get("/", function (req, res){
     res.render("index");
@@ -124,12 +132,15 @@ app.post("/loginuser", (req, res) => {
             name = result[0].name;
             username = result[0].username;
             userid = result[0].userid;
+            req.session.loggedin = true;
+            req.session.username = username;
             res.redirect("blogpage.ejs");
         };
     });
 });
 
 app.get("/blogpage.ejs", function (req, res) {
+    if (req.session.loggedin){
     let query = db.query ("SELECT username FROM users", (err, result) => {
         if (err) throw err;
         result.forEach(element => { arr.push(element.username); });
@@ -143,6 +154,10 @@ app.get("/blogpage.ejs", function (req, res) {
             });
         });
     });
+    }
+    else{
+        res.redirect("/login.ejs");
+    }
 });
 
 app.get("/aboutus.ejs", function (req, res){
@@ -250,6 +265,31 @@ app.post("/updatepost:postid", function (req, res){
         if (err) throw err;
     });
     res.redirect("blogpage.ejs");
+});
+
+app.post("/sharepost:postid", function (req, res){
+    let sharedata = {
+        postid: parseInt(req.params.postid.slice(1))
+    };
+    let sharequery = db.query("SELECT * FROM posts WHERE ?", sharedata, (err, results) => {
+        if (err) throw err;
+        const today = new Date();
+        let data = {
+            username: results[0].username,
+            name: results[0].name,
+            message: results[0].message,
+            datetime: today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()+' '+today.getHours()+':'+today.getMinutes()+':'+today.getSeconds(),
+            media: results[0].media,
+            mediatype: results[0].mediatype,
+            usershare: name
+        }
+
+        let postquery = db.query("INSERT INTO posts SET ?", data, (err, results) => {
+            if (err) throw err;
+            posts = results;
+            res.redirect("blogpage.ejs");
+        });
+    });
 });
 
 app.listen(3000, () => console.log('listening on port 3000!')); 
