@@ -1116,11 +1116,9 @@ nav{
     text-decoration: underline;
     cursor: pointer;
 }
-.post{
+.post-message{
     width: 739px;
     height: 141px;
-    left: 40px;
-    top: 80px;
     font-family: 'Poppins';
     font-style: normal;
     font-weight: 400;   
@@ -1128,6 +1126,12 @@ nav{
     line-height: 30px;
     letter-spacing: 0.1em;
     margin-left: 30px;
+}
+.post-message a{
+    text-decoration: underline;
+}
+.post-message a:hover{
+    color: #aaa;
 }
 #post-media{
     width: 739px;

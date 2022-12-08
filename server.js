@@ -151,14 +151,28 @@ app.get("/aboutus.ejs", function (req, res){
 
 app.post("/posting", upload.single('media'), function (req, res){
     const today = new Date();
-    let data = {
-        username: username,
-        name: name,
-        message: req.body.message,
-        datetime: today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()+' '+today.getHours()+':'+today.getMinutes()+':'+today.getSeconds(),
-        media: req.file.buffer.toString('base64'),
-        mediatype: req.file.mimetype
-    };
+    let data;
+
+    if (req.file != null) {
+        data = {
+            username: username,
+            name: name,
+            message: req.body.message,
+            datetime: today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()+' '+today.getHours()+':'+today.getMinutes()+':'+today.getSeconds(),
+            media: req.file.buffer.toString('base64'),
+            mediatype: req.file.mimetype
+        };
+    }
+    else {
+        data = {
+            username: username,
+            name: name,
+            message: req.body.message,
+            datetime: today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()+' '+today.getHours()+':'+today.getMinutes()+':'+today.getSeconds(),
+        };
+    }
+
+    
     let sql = "INSERT INTO posts SET ?";
     let query = db.query(sql, data, (err, results) => {
         if (err) throw err;

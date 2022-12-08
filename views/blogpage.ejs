@@ -135,7 +135,7 @@
                             <p id="profile"><%= post.name %></p>
                             <p id="user">@<%= post.username %></p>
                         </div>
-                        <p class="post"><%= post.message %></p>
+                        <p class="post-message"><%= post.message %></p>
                         <% if (post.media != null) { %>
                             <% if (post.mediatype.search("image") == 0) {%>
                                 <img src="data:<%= post.mediatype %>;base64,<%= post.media %>" alt="Embedded Media" id="post-media"/>
@@ -192,6 +192,13 @@
     </div>
     
     <script>
+        $(document).ready(function() {
+            $(".post-message").html((i, text) => {
+                console.log(text);
+                return convertLink(text);
+            });
+        });
+
         $(".button-cancel").click(function () {
             $("#blog-post").val("");
         });
@@ -250,6 +257,14 @@
             };
             console.log($("#button-post-video").val());
         };
+
+        function convertLink (text) {
+        let regex = /(https?:\/\/[^\s]+)/g;
+
+        return text.replace(regex, function (url) {
+            return "<a href=\""+ url + "\">" + url + "</a>"
+        });
+    }
     </script>
 </body>
 
