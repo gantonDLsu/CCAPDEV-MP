@@ -176,12 +176,13 @@ app.post("/loginuser", (req, res) => {
                             res.redirect("blogpage.ejs");
                         }
                         else
-                            res.send('Username or Password is Incorrect!');
+                            res.render("login", { errorMessage: 'Username or Password is Incorrect!' });
+
                     });
                 });
             }
             else
-                res.send('Username or Password is Incorrect!');
+                res.render("login", { errorMessage: 'Username or Password is Incorrect!' });
         });
     }
 });
@@ -242,7 +243,18 @@ app.get("/viewblogpage.ejs", function (req, res) {
             posts = postresults;
             let commentquery = db.query("SELECT * FROM usercomments", (err, commentresults) => {
                 comments = commentresults;
-                res.render("viewblogpage", { Name: req.session.name, userName: req.session.username, posts: posts, comments: comments, toFollow: arr, isEditingPost: false, sessionAvail: req.session.loggedin });
+
+                if (req.session.username != null) {
+                    req.session.loggedin = true;
+                    res.redirect("/blogpage.ejs");
+                }
+                else res.render("viewblogpage", {
+                    Name: req.session.name,
+                    userName: req.session.username,
+                    posts: posts, comments: comments,
+                    toFollow: arr,
+                    sessionAvail: req.session.loggedin
+                });
             });
         });
     });
@@ -341,7 +353,7 @@ app.post("/editpost:postid", function (req, res) {
     let editpost = db.query("SELECT * FROM posts WHERE ?", data, (err, result) => {
         if (err) throw err;
 
-        res.render("blogpage", { Name: req.session.name, userName: username, posts: posts, comments: comments, toFollow: arr, isEditingPost: true, editPostID: result[0].postid, editPostMessage: result[0].message });
+        res.render("blogpage", { Name: req.session.name, userName: req.session.username, posts: posts, comments: comments, toFollow: arr, isEditingPost: true, editPostID: result[0].postid, editPostMessage: result[0].message });
     })
 });
 

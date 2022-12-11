@@ -119,23 +119,27 @@
             <div class="blog-entries">
                 <% posts.forEach(function(post){ %>
                 <div class="entry">
-                    <% if (userName == post.username) { %>
+                    <% if (userName == post.username && post.usershare == null) { %>
                         <form action="/editpost:<%=post.postid%>" method="post">  
                             <button type="submit" class="edit-button">Edit post</button>
                         </form>
                         <form action="/deletepost:<%=post.postid%>" method="post">
                             <button type="submit" class="delete-button">Delete post</button>
                         </form>
-                    <% } else { %>
+                    <% } else if (post.usershare) { %>
                         <% if (Name == post.usershare) { %>
                             <form action="/deletepost:<%=post.postid%>" method="post">
                                 <button type="submit" class="delete-button">Delete post</button>
                             </form>
-                        <% } else { %>
+                        <% } else if (Name != post.name) { %>
                             <form action="/sharepost:<%=post.postid%>" method="post">
                                 <button type="submit" class="share-button">Share post</button>
                             </form>
                         <% } %>
+                    <% } else {%>
+                        <form action="/sharepost:<%=post.postid%>" method="post">
+                            <button type="submit" class="share-button">Share post</button>
+                        </form>
                     <% } %>
                     <% if (post.usershare != null) { %>
                         <div class="shared-post">
