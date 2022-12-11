@@ -1,6 +1,0 @@
-SECRET = "This is the secret"
-HOST = "dpg-cearacla4996mecchejg-a"
-PORT = 5432
-USER = "root"
-PASSWORD = "gTZXinYKn5hBWCFvYJUYLSkiYjIiydow"
-DATABASE = "enteract"
