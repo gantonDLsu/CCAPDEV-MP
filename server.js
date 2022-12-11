@@ -172,7 +172,6 @@ app.post("/loginuser", (req, res) => {
                 req.session.loggedin = true;
                 req.session.username = username;
                 req.session.name = userGate[0].name;
-                console.log(req.session);
                 // put session ID in data base.
                 res.redirect("blogpage.ejs");
             }
