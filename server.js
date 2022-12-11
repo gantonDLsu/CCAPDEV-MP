@@ -1,4 +1,4 @@
-const dotenv = require('dotenv').config();
+require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
@@ -11,11 +11,11 @@ const session = require('express-session');
 const app = express();
 
 const db = mysql.createConnection({
-    host: 'dpg-cearacla4996mecchejg-a',
-    port: 5432,
-    user: 'root',
-    password: 'gTZXinYKn5hBWCFvYJUYLSkiYjIiydow', //CHANGE ACCORDING TO YOUR WORKBENCH PASSWORD
-    database: 'enteract', // input database name
+    host: process.env.HOST,
+    port: process.env.PORT,
+    user: process.env.USER,
+    password: process.env.PASSWORD, //CHANGE ACCORDING TO YOUR WORKBENCH PASSWORD
+    database: process.env.DATABASE, // input database name
 });
 
 db.connect(function (err) {
