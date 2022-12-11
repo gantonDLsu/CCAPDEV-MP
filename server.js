@@ -242,7 +242,7 @@ app.get("/viewblogpage.ejs", function (req, res) {
             posts = postresults;
             let commentquery = db.query("SELECT * FROM usercomments", (err, commentresults) => {
                 comments = commentresults;
-                res.render("blogpage", { Name: req.session.name, userName: req.session.username, posts: posts, comments: comments, toFollow: arr, isEditingPost: false, sessionAvail: req.session.loggedin });
+                res.render("viewblogpage", { Name: req.session.name, userName: req.session.username, posts: posts, comments: comments, toFollow: arr, isEditingPost: false, sessionAvail: req.session.loggedin });
             });
         });
     });

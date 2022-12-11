@@ -13,9 +13,6 @@
 </head>
 
 <body>
-    <% var isEditingPost; %>
-    <% var editPostID, editPostMessage; %>
-
     <!--Navbar-->
     <header class="blog-navbar">
         <img src="images/logo2.png" alt="Enter-Act Logo" onclick='location.href="enteract.ejs"'>
@@ -67,30 +64,13 @@
         <!--Blog Posting interface-->
         <div class="blog-posts">
             <div class="blog-outerdesign">
-                <% if (isEditingPost) { %> 
-                    <form id="getaction" action="/updatepost:<%=editPostID%>" method="post">
                         <div class="blog-innerdesign">
                             <div class="usericon">
                                 <img src="images/usericon.png" alt="User Icon">
                             </div>
                             <div class="username">
-                                <p id="profile"><%=Name %></p>
-                                <p id="user">@<%=userName %></p>
-                            </div>
-                            <textarea name="message" id="blog-post" cols="90" rows="20"><%=editPostMessage%></textarea>
-                        </div>
-                        <button type="submit" class="button-post">Update</button> 
-                    </form>
-                    <button class="button-cancel" onclick="location.href='blogpage.ejs'">CANCEL</button>
-                <% } else { %> 
-                    <form id="getaction" action="/posting" enctype="multipart/form-data" method="post">
-                        <div class="blog-innerdesign">
-                            <div class="usericon">
-                                <img src="images/usericon.png" alt="User Icon">
-                            </div>
-                            <div class="username">
-                                <p id="profile"><%=Name %></p>
-                                <p id="user">@<%=userName %></p>
+                                <p id="profile"><%= Name %></p>
+                                <p id="user">@<%= userName %></p>
                             </div>
                             <textarea name="message" id="blog-post" cols="90" rows="20" placeholder="Write a post..."></textarea>
                         </div>
@@ -98,8 +78,7 @@
                         <input type="file" name="media" id="button-post-video" accept="video/*" onchange="loadFile(event)">
                         <input type="file" name="media" id="button-post-audio" accept="audio/*" onchange="loadFile(event)">
 
-                        <button type="submit" class="button-post">Post</button> 
-                    </form>
+                        <button onclick='location.href="signup.ejs"' class="button-post">Post</button> 
                     <image id="post-image" src="#"></image>
                     <video id="post-video" src="#" controls></video>
                     <audio id="post-audio" src="#" controls></audio>
@@ -113,30 +92,11 @@
                     <label for="button-post-audio" class="button-post-audio">
                         <img src="images/audio.png" alt="Audio Icon">
                     </label>
-                <% } %>
             </div>
             <!--Blog Entries-->
             <div class="blog-entries">
                 <% posts.forEach(function(post){ %>
                 <div class="entry">
-                    <% if (userName == post.username) { %>
-                        <form action="/editpost:<%=post.postid%>" method="post">  
-                            <button type="submit" class="edit-button">Edit post</button>
-                        </form>
-                        <form action="/deletepost:<%=post.postid%>" method="post">
-                            <button type="submit" class="delete-button">Delete post</button>
-                        </form>
-                    <% } else { %>
-                        <% if (Name == post.usershare) { %>
-                            <form action="/deletepost:<%=post.postid%>" method="post">
-                                <button type="submit" class="delete-button">Delete post</button>
-                            </form>
-                        <% } else { %>
-                            <form action="/sharepost:<%=post.postid%>" method="post">
-                                <button type="submit" class="share-button">Share post</button>
-                            </form>
-                        <% } %>
-                    <% } %>
                     <% if (post.usershare != null) { %>
                         <div class="shared-post">
                             <p><%=post.usershare%> shared <%=post.name%>'s post</p>
@@ -163,18 +123,11 @@
                             <% } %>
                         <% } %>
                     </div>
-                    <form action="/addcomment:<%= post.postid %>" method="post">
                         <textarea name="comment" id="comment" placeholder="Write a comment..."></textarea>
-                        <button type="submit" class="comment-button">Comment</button>
-                    </form>
+                        <button onclick='location.href="signup.ejs"' class="comment-button">Comment</button>
                     <% comments.forEach(function (comment) { %>
                         <% if (post.postid == comment.postid) { %>
                         <div class="entry-reply">
-                            <% if (Name == comment.name || userName == post.username) { %>
-                                <form action="/deletecomment:<%=comment.commentid%>" method="post">
-                                    <button type="submit" class="delete-comment">Delete</button>
-                                </form>
-                            <% } %>
                             <p id="replyuser"><%= comment.name %></p>
                             <p id="reply"><%= comment.comment %></p>
                         </div>
