@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&family=Poppins&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>Enter-Act</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="buttonfunctions.js"></script>
+</head>
+
+<body>
+    <% var isEditingPost; %>
+    <% var editPostID, editPostMessage; %>
+
+    <!--Navbar-->
+    <header class="blog-navbar">
+        <img src="images/logo2.png" alt="Enter-Act Logo" onclick='location.href="enteract.ejs"'>
+        <span>Enter Act</span>
+        <nav>
+            <ul>
+                <li>Home</li>
+                <li>My Profile</li>
+                <li>Settings</li>
+            </ul>
+        </nav>
+        <div id="post">Post a Blog</div>
+    </header>
+    <!--Contents of the Blog-->
+    <div class="blog-content">
+        <div class="blog-trending">
+            <p>What's Trending:</p>
+            <img src="images/Vector1.png" alt="">
+            <div class="trending-box">
+                <!--Trending Topics-->
+                <nav id="topics">
+                    <ul>
+                        <li><a href="https://www.doh.gov.ph/covid19tracker" target="_blank">COVID-19</a></li>
+                        <li><a href="https://genshin.hoyoverse.com/en/" target="_blank">GENSHIN IMPACT</a></li>
+                        <li><a href="https://www.dlsu.edu.ph/" target="_blank">DLSU</a></li>
+                    </ul>
+                </nav>
+                <hr>
+                <!--Trending Hashtags-->
+                <nav id="hashtags">
+                    <ul>
+                        <li>#TIKTOK</li>
+                        <li>#VALORANT</li>
+                        <li>#SPORTS</li>
+                    </ul>
+                </nav>
+                <hr>
+                <!--Who to Follow-->
+                <h2>who to follow:</h2>
+                <nav id="users">
+                    <ul>
+                        <li>@<%= toFollow[0] %></li>
+                        <li>@<%= toFollow[1] %></li>
+                        <li>@<%= toFollow[2] %></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <!--Blog Posting interface-->
+        <div class="blog-posts">
+            <div class="blog-outerdesign">
+                <% if (isEditingPost) { %> 
+                    <form id="getaction" action="/updatepost:<%=editPostID%>" method="post">
+                        <div class="blog-innerdesign">
+                            <div class="usericon">
+                                <img src="images/usericon.png" alt="User Icon">
+                            </div>
+                            <div class="username">
+                                <p id="profile"><%=Name %></p>
+                                <p id="user">@<%=userName %></p>
+                            </div>
+                            <textarea name="message" id="blog-post" cols="90" rows="20"><%=editPostMessage%></textarea>
+                        </div>
+                        <button type="submit" class="button-post">Update</button> 
+                    </form>
+                    <button class="button-cancel" onclick="location.href='blogpage.ejs'">CANCEL</button>
+                <% } else { %> 
+                    <form id="getaction" action="/posting" enctype="multipart/form-data" method="post">
+                        <div class="blog-innerdesign">
+                            <div class="usericon">
+                                <img src="images/usericon.png" alt="User Icon">
+                            </div>
+                            <div class="username">
+                                <p id="profile"><%=Name %></p>
+                                <p id="user">@<%=userName %></p>
+                            </div>
+                            <textarea name="message" id="blog-post" cols="90" rows="20" placeholder="Write a post..."></textarea>
+                        </div>
+                        <input type="file" name="media" id="button-post-img" accept="image/*" onchange="loadFile(event)">
+                        <input type="file" name="media" id="button-post-video" accept="video/*" onchange="loadFile(event)">
+                        <input type="file" name="media" id="button-post-audio" accept="audio/*" onchange="loadFile(event)">
+
+                        <button type="submit" class="button-post">Post</button> 
+                    </form>
+                    <image id="post-image" src="#"></image>
+                    <video id="post-video" src="#" controls></video>
+                    <audio id="post-audio" src="#" controls></audio>
+                    <button class="button-cancel">CANCEL</button>
+                    <label for="button-post-img" class="button-post-img">
+                        <img src="images/image.png" alt="Image Icon">
+                    </label>
+                    <label for="button-post-video" class="button-post-video">
+                        <img src="images/video.png" alt="Video Icon">
+                    </label>
+                    <label for="button-post-audio" class="button-post-audio">
+                        <img src="images/audio.png" alt="Audio Icon">
+                    </label>
+                <% } %>
+            </div>
+            <!--Blog Entries-->
+            <div class="blog-entries">
+                <% posts.forEach(function(post){ %>
+                <div class="entry">
+                    <% if (userName == post.username) { %>
+                        <form action="/editpost:<%=post.postid%>" method="post">  
+                            <button type="submit" class="edit-button">Edit post</button>
+                        </form>
+                        <form action="/deletepost:<%=post.postid%>" method="post">
+                            <button type="submit" class="delete-button">Delete post</button>
+                        </form>
+                    <% } else { %>
+                        <% if (Name == post.usershare) { %>
+                            <form action="/deletepost:<%=post.postid%>" method="post">
+                                <button type="submit" class="delete-button">Delete post</button>
+                            </form>
+                        <% } else { %>
+                            <form action="/sharepost:<%=post.postid%>" method="post">
+                                <button type="submit" class="share-button">Share post</button>
+                            </form>
+                        <% } %>
+                    <% } %>
+                    <% if (post.usershare != null) { %>
+                        <div class="shared-post">
+                            <p><%=post.usershare%> shared <%=post.name%>'s post</p>
+                        </div>
+                    <% } %>
+                    <div class="entry-post">
+                        <div class="postusericon">
+                            <img src="images/usericon.png" alt="User Icon">
+                        </div>
+                        <div class="postusername">
+                            <p id="profile"><%= post.name %></p>
+                            <p id="user">@<%= post.username %></p>
+                        </div>
+                        <p class="post-message"><%= post.message %></p>
+                        <% if (post.media != null) { %>
+                            <% if (post.mediatype.search("image") == 0) {%>
+                                <img src="data:<%= post.mediatype %>;base64,<%= post.media %>" alt="Embedded Media" id="post-media"/>
+                            <% } %>
+                            <% if (post.mediatype.search("video") == 0) {%>
+                                <video src="data:<%= post.mediatype %>;base64,<%= post.media %>" alt="Embedded Media" id="post-media" controls></video>
+                            <% } %>
+                            <% if (post.mediatype.search("audio") == 0) {%>
+                                <audio src="data:<%= post.mediatype %>;base64,<%= post.media %>" alt="Embedded Media" id="post-media" controls></audio>
+                            <% } %>
+                        <% } %>
+                    </div>
+                    <form action="/addcomment:<%= post.postid %>" method="post">
+                        <textarea name="comment" id="comment" placeholder="Write a comment..."></textarea>
+                        <button type="submit" class="comment-button">Comment</button>
+                    </form>
+                    <% comments.forEach(function (comment) { %>
+                        <% if (post.postid == comment.postid) { %>
+                        <div class="entry-reply">
+                            <% if (Name == comment.name || userName == post.username) { %>
+                                <form action="/deletecomment:<%=comment.commentid%>" method="post">
+                                    <button type="submit" class="delete-comment">Delete</button>
+                                </form>
+                            <% } %>
+                            <p id="replyuser"><%= comment.name %></p>
+                            <p id="reply"><%= comment.comment %></p>
+                        </div>
+                        <% }; %>
+                    <% }); %>
+                </div>
+                <% }); %>
+            </div>
+            <div class="blog-highlights">
+                <div class="highlight-box">
+                    <span id="title">Highlights:</span>
+                    <div class="highlight-sports">
+                        <img src="images/sports.png" alt="Girls playing soccer" onclick="window.open('//news.abs-cbn.com/sports', '_blank');">
+                        <span>#SPORTS</span>
+                    </div>
+                    <div class="highlight-games">
+                        <img src="images/valo1.png" alt="Valorant Image" onclick="window.open('//playvalorant.com/en-us/', '_blank');">
+                       <img src="images/valo2.png" alt="Valorant Image" onclick="window.open('//playvalorant.com/en-us/', '_blank');">
+                        <span>#GAMES</span>
+                    </div>
+                    <hr>
+                    <div class="highlight-news">
+                        <span>News:</span>
+                        <img src="images/news.png" alt="Breaking News" onclick="window.open('//news.abs-cbn.com/', '_blank');">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        $(document).ready(function() {
+            $(".post-message").html((i, text) => {
+                console.log(text);
+                return convertLink(text);
+            });
+        });
+
+        $(".button-cancel").click(function () {
+            $("#blog-post").val("");
+        });
+
+        var image = document.getElementById('post-image');
+        var video = document.getElementById('post-video');
+        var audio = document.getElementById('post-audio');
+
+        var loadFile = function(event) {
+            if (event.target.files[0].type.search("image") == 0) {
+                image.style.display = "block";
+                video.style.display = "none";
+                audio.style.display = "none";
+
+                $(".blog-outerdesign").css("height","1065");
+                $(".blog-entries").css("top","1100px");
+
+	            image.src = URL.createObjectURL(event.target.files[0]);
+
+                video.src = "#";
+                $("#button-post-video").replaceWith($("#button-post-video").val('').clone(true));
+
+                audio.src = "#";
+                $("#button-post-audio").replaceWith($("#button-post-audio").val('').clone(true));
+            }
+            else if (event.target.files[0].type.search("video") == 0) {
+                image.style.display = "none";
+                video.style.display = "block";
+                audio.style.display = "none";
+
+                $(".blog-outerdesign").css("height","1065");
+                $(".blog-entries").css("top","1100px");
+
+                image.src = "#";
+                $("#button-post-image").replaceWith($("#button-post-image").val('').clone(true));
+
+	            video.src = URL.createObjectURL(event.target.files[0]);
+
+                audio.src = "#";
+                $("#button-post-audio").replaceWith($("#button-post-audio").val('').clone(true));
+            }
+            else if (event.target.files[0].type.search("audio") == 0) {
+                image.style.display = "none";
+                video.style.display = "none";
+                audio.style.display = "block";
+                $(".blog-outerdesign").css("height","615");
+                $(".blog-entries").css("top","650px");
+
+                image.src = "#";
+                $("#button-post-image").replaceWith($("#button-post-image").val('').clone(true));
+
+                video.src = "#";
+                $("#button-post-video").replaceWith($("#button-post-video").val('').clone(true));
+
+	            audio.src = URL.createObjectURL(event.target.files[0]);
+            };
+            console.log($("#button-post-video").val());
+        };
+
+        function convertLink (text) {
+        let regex = /(https?:\/\/[^\s]+)/g;
+
+        return text.replace(regex, function (url) {
+            return "<a href=\""+ url + "\">" + url + "</a>"
+        });
+    }
+    </script>
+</body>
+
+</html>
