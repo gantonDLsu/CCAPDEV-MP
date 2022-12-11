@@ -11,9 +11,10 @@ const session = require('express-session');
 const app = express();
 
 const db = mysql.createConnection({
-    host: 'localhost',
+    host: 'dpg-cearacla4996mecchejg-a',
+    port: 5432,
     user: 'root',
-    password: 'password123', //CHANGE ACCORDING TO YOUR WORKBENCH PASSWORD
+    password: 'gTZXinYKn5hBWCFvYJUYLSkiYjIiydow', //CHANGE ACCORDING TO YOUR WORKBENCH PASSWORD
     database: 'enteract', // input database name
 });
 
