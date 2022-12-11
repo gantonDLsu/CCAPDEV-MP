@@ -66,8 +66,6 @@ app.post("/adduser", async (req, res) => {
         // HASHING
         const salt = await bcrypt.genSalt();
         const hashedPassword = await bcrypt.hash(req.body.password, salt);
-        console.log(salt);
-        console.log(hashedPassword);
 
         // DATA
         let data = {
